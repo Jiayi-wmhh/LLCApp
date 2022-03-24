@@ -26,7 +26,7 @@ def graph(request):
 	SSH_BASTION_ADDRESS = '18.221.180.201'  # ここに踏み台のEC2サーバーのIPアドレスを入れる
 	# SSH_PORT = 22
 	SSH_USER = 'ec2-user'
-	SSH_PKEY_PATH = os.path.expanduser('./templates/webserver_key.pem')  # ここにsshで繋ぐときのキーファイルを指定する
+	SSH_PKEY_PATH = os.path.expanduser('/Users/jiayi/Desktop/webserver_key.pem')  # ここにsshで繋ぐときのキーファイルを指定する
 	MYSQL_HOST = 'dev.cc2sysyytboz.us-east-2.rds.amazonaws.com'  # ここにAmazon Aurora MySQLのアドレスを書く
 	MYSQL_PORT = 3306
 	MYSQL_USER = 'admin'
