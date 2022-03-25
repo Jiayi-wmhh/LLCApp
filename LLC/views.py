@@ -26,7 +26,7 @@ def graph(request):
 	SSH_BASTION_ADDRESS = '18.221.180.201'  # ここに踏み台のEC2サーバーのIPアドレスを入れる
 	# SSH_PORT = 22
 	SSH_USER = 'ec2-user'
-	SSH_PKEY_PATH = os.path.expanduser('LLCApp/templates/webserver_key.pem')  # ここにsshで繋ぐときのキーファイルを指定する
+	SSH_PKEY_PATH = os.path.expanduser('./LLCApp/templates/webserver_key.pem')  # ここにsshで繋ぐときのキーファイルを指定する
 	MYSQL_HOST = 'dev.cc2sysyytboz.us-east-2.rds.amazonaws.com'  # ここにAmazon Aurora MySQLのアドレスを書く
 	MYSQL_PORT = 3306
 	MYSQL_USER = 'admin'
@@ -69,10 +69,10 @@ def graph(request):
 	fig.update_traces(textposition='inside')
 	fig.update_layout(uniformtext_minsize=12, uniformtext_mode='hide',
                     margin=dict(t=0, b=0, l=0, r=0))
-	plot(fig, validate=False, filename='./templates/simplePieChart.html',
+	plot(fig, validate=False, filename='./LLCApp/templates/simplePieChart.html',
          auto_open=False)
 	fig = px.bar(x=simplename, y=simplevalue)
-	plot(fig, validate=False, filename='./templates/simpleBarChart.html',
+	plot(fig, validate=False, filename='./LLCApp/templates/simpleBarChart.html',
          auto_open=False)
 	chartname = []
 	chartvalue = []
@@ -439,7 +439,7 @@ def graph(request):
 		marker_line_width=0.5,
   ))
 	fig.update_layout(width=830, height=400,)
-	plot(fig, validate=False, filename='./templates/fig4.html',
+	plot(fig, validate=False, filename='./LLCApp/templates/fig4.html',
          auto_open=False)
 	lat = []
 	lon = []
@@ -1167,6 +1167,6 @@ def graph(request):
 	                    countrycolor='rgb(30,144,255)'
 	                ),
 	                )
-	plot(fig, validate=False, filename='./templates/fig6.html',
+	plot(fig, validate=False, filename='./LLCApp/templates/fig6.html',
 	     auto_open=False)
 	return render(request, 'graph.html', terminal)
