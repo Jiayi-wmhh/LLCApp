@@ -23,7 +23,7 @@ def data(request):
 		SSH_BASTION_ADDRESS = '18.221.180.201'  # ここに踏み台のEC2サーバーのIPアドレスを入れる
 		# SSH_PORT = 22
 		SSH_USER = 'ec2-user'
-		SSH_PKEY_PATH = os.path.expanduser('/Users/jiayi/Desktop/webserver_key.pem')  # ここにsshで繋ぐときのキーファイルを指定する
+		SSH_PKEY_PATH = os.path.expanduser('./LLCApp/templates/webserver_key.pem')  # ここにsshで繋ぐときのキーファイルを指定する
 		MYSQL_HOST = 'dev.cc2sysyytboz.us-east-2.rds.amazonaws.com'  # ここにAmazon Aurora MySQLのアドレスを書く
 		MYSQL_PORT = 3306
 		MYSQL_USER = 'admin'
@@ -59,7 +59,7 @@ def data(request):
 		fig.update_traces(textposition='inside')
 		fig.update_layout(uniformtext_minsize=12, uniformtext_mode='hide',
 		                margin=dict(t=0, b=0, l=0, r=0))
-		plot(fig, validate=False, filename='./templates/effect_data.html',
+		plot(fig, validate=False, filename='./LLCApp/templates/effect_data.html',
 		     auto_open=False)
 	elif utype == 'product':
 		product = request.POST.get('product')
@@ -68,7 +68,7 @@ def data(request):
 		SSH_BASTION_ADDRESS = '18.221.180.201'  # ここに踏み台のEC2サーバーのIPアドレスを入れる
 		# SSH_PORT = 22
 		SSH_USER = 'ec2-user'
-		SSH_PKEY_PATH = os.path.expanduser('/Users/jiayi/Desktop/webserver_key.pem')  # ここにsshで繋ぐときのキーファイルを指定する
+		SSH_PKEY_PATH = os.path.expanduser('./LLCApp/templates/webserver_key.pem')  # ここにsshで繋ぐときのキーファイルを指定する
 		MYSQL_HOST = 'dev.cc2sysyytboz.us-east-2.rds.amazonaws.com'  # ここにAmazon Aurora MySQLのアドレスを書く
 		MYSQL_PORT = 3306
 		MYSQL_USER = 'admin'
@@ -103,7 +103,7 @@ def data(request):
 		fig.update_traces(textposition='inside')
 		fig.update_layout(uniformtext_minsize=12, uniformtext_mode='hide',
 		                margin=dict(t=0, b=0, l=0, r=0))
-		plot(fig, validate=False, filename='./templates/effect_data.html',
+		plot(fig, validate=False, filename='./LLCApp/templates/effect_data.html',
 		     auto_open=False)
 	elif utype == 'compare':
 		c1 = request.POST.get('compare1')
@@ -124,7 +124,7 @@ def data(request):
 		prod_data2 = []
 		prod_name = []
 		SSH_USER = 'ec2-user'
-		SSH_PKEY_PATH = os.path.expanduser('/Users/jiayi/Desktop/webserver_key.pem')  # ここにsshで繋ぐときのキーファイルを指定する
+		SSH_PKEY_PATH = os.path.expanduser('./LLCApp/templates/webserver_key.pem')  # ここにsshで繋ぐときのキーファイルを指定する
 		MYSQL_HOST = 'dev.cc2sysyytboz.us-east-2.rds.amazonaws.com'  # ここにAmazon Aurora MySQLのアドレスを書く
 		MYSQL_PORT = 3306
 		MYSQL_USER = 'admin'
