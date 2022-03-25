@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title> Stock Information</title>
+        <script src="https://code.highcharts.com/stock/highstock.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    </head>
+
+    <body>
+        <div id = "result" class="resultBox">
+            </div>
+            <div id = "companyDetail" >
+
+            </div>
+            <div id = "summary" >
+
+            </div>
+            <div id = "chart" >
+
+            </div>
+            <div id = "news" >
+
+            </div>
+        </div>
+    </body> 
+</html>
+
+<script>
+    var res_json = JSON.parse('{{ Result | escapejs }}');
+    console.log(res_json)
+    if(res_json.hasOwnProperty('country')){
+        requestCompany(res_json)
+    }
+    else if(res_json.hasOwnProperty('pc')){
+        requestSummary(res_json)
+    }
+    else{
+         if(res_json.hasOwnProperty('c')){
+           requestTable(res_json)
+        }else{
+        requestNews(res_json)
+        }
+    }
+
+    function requestCompany(company_info){
+        var companyTable = document.getElementById("companyDetail");
+        companyTable.innerHTML = '<div id = "company_img" class = "img_style"><img src = '+company_info["logo"]+ '></div>';
+        companyTable.innerHTML += '<div id = "company_table" class ="company_table"><table style= "width:100%">'
+                                + '<tr><th> Company Name</th><td>'+company_info["name"] + '</td>'
+                                + '<tr><th> Stock Ticker Symbol</th><td>'+company_info["ticker"] + '</td>'
+                                + '<tr><th> Stock Exchange Code</th><td>'+company_info["exchange"] + '</td>'
+                                + '<tr><th> Company IPO Date</th><td>'+company_info["ipo"] + '</td>'
+                                + '<tr><th> Category</th><td>'+company_info["finnhubIndustry"] + '</td>'       
+                                +'</table></div>';
+                                                 
+    }
+
+    function requestSummary(summary_info){
+        var summaryTable = document.getElementById("summary");
+        summaryTable.innerHTML += '<div id = "summary_table" class ="company_table"><table style= "width:100%">'
+                                + '<tr><th> Trading Day</th><td id = "today">'+ToLocalDate(summary_info["t"]) + '</td>'
+                                + '<tr><th> Previous Closing Price</th><td>'+summary_info["pc"] + '</td>'
+                                + '<tr><th> Opening Price</th><td>'+summary_info["o"] + '</td>'
+                                + '<tr><th> High Price</th><td>'+summary_info["h"] + '</td>'
+                                + '<tr><th> Low Price</th><td>'+summary_info["l"] + '</td>'
+                                + '<tr><th> Change</th><td id = "change">'+summary_info["d"] + '</td>'
+                                + '<tr><th> Change Percent</th><td id = "changeP">'+summary_info["dp"] + '</td>'       
+                                +'</table></div>';
+        var d = document.getElementById("change");
+        var dp = document.getElementById("changeP");
+        if(summary_info["d"] > 0){
+            d.innerHTML += '<img src ="/static/img/GreenArrowUp.png" style = "height:10px; width:10px;">'
+        }else{
+            d.innerHTML += '<img src ="/static/img/RedArrowDown.png" style = "height:10px; width:10px;">'
+        }
+        if(summary_info["dp"] > 0){
+            dp.innerHTML += '<img src ="/static/img/GreenArrowUp.png" style = "height:10px; width:10px;">'
+        }else{
+            dp.innerHTML += '<img src ="/static/img/RedArrowDown.png" style = "height:10px; width:10px;">'
+        }
+
+    }
+    function ToLocalDate (inDate) {
+        var newdate = new Date(inDate*1000);
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        return newdate.getDate() + " " + months[newdate.getMonth()] + ", " + newdate.getFullYear();
+    }
+
+    function requestTable(table_info){
+        var storckChart = document.getElementById("chart");
+        storckChart.innerHTML = '<div id ="container" class = "chartbox"> </div>';
+        
+        // get data
+        var newdate = new Date();
+        var volume = [];
+        var price = [];
+        var i= 0;
+        for ( i; i < table_info["t"].length; i += 1) {
+
+            volume.push([table_info["t"][i]*1000,table_info["v"][i]]);
+            price.push([table_info["t"][i]*1000,table_info["c"][i]]);
+
+        }   
+        const months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+        Highcharts.stockChart('container', {
+
+            rangeSelector: {
+                buttons: [{
+                    type: 'day',
+                    count: 7,
+                    text: '7d',
+                    title: 'View 7 days'
+                }, {
+                    type: 'day',
+                    count: 15,
+                    text: '15d',
+                    title: 'View 15 days'
+                },{
+                    type: 'month',
+                    count: 1,
+                    text: '1m',
+                    title: 'View 1 month'
+                },{
+                    type: 'month',
+                    count: 3,
+                    text: '3m',
+                    title: 'View 3 months'
+                }, {
+                    type: 'month',
+                    count: 6,
+                    text: '6m',
+                    title: 'View 6 months'
+                }]
+            },
+            
+            title: {
+                text: 'Stock Price ' +  newdate.getFullYear() +'-'+ months[newdate.getMonth()]+ '-'+ newdate.getDate()
+            },
+            subtitle: {
+                text: '<a href="https://finnhub.io/." style = "color:blue;"><u>Search Finnhub</u></a>',
+            },
+            yAxis: [{
+                title: {
+                    text: 'Volumn'
+                },            
+                resize: {
+                    enabled: true
+                },
+                opposite:true
+            }, {
+                title: {
+                    text: 'Stock Price'
+                },
+                opposite:false
+            }],
+            tooltip: {
+                shared: true
+            },
+            series: [{
+                data: price,
+                type: 'area',
+                name:'Stock Price',
+                threshold: null,
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                },
+                yAxis: 1,
+            },
+            {
+                type: 'column',
+                name: 'Volume',
+                data: volume,
+                yAxis: 0,
+                pointWidth: 4,
+            }]
+        });
+    }
+
+    function requestNews(news_info){
+        var news_table = document.getElementById("news");
+        var count = 0;
+        var i = 0;
+        while(count < 10){
+            if(news_info[i]["image"]){
+                news_table.innerHTML += '<div class = "newsbox" style ="margin-top:15px;">'
+                                    + '<img src="'+news_info[i]["image"]+'" width = "100px" height = "100px" style = "margin-top:10px; margin-left:10px;">'
+                                    + '<div style = "margin-left:120px; margin-top:-110px;height:120px;width:70%; position: absolute;font-family: Verdana, Geneva, Tahoma, sans-serif;">'
+                                    + '<h1  style = "font-size:14px;text-aglin:vertical-align;" >'+news_info[i]["headline"]+'</h1>'
+                                    + '<p  style = "font-weight:normal;font-size:14px;text-aglin:vertical-align;" >'+ToLocalDate(news_info[i]["datetime"])+'</p>'
+                                    + '<a href='+news_info[i]["url"]+' style = "color:blue">See Original Post</a>'
+                                    +'</div></div>';        
+                count ++;        
+            }
+        
+            i++;
+        }
+    }
+</script>
+
+<style>
+    .header{
+        font-size: 25px;
+        border: 1px transparent ;
+        border-radius: 4px; 
+        margin-left:20%; 
+        margin-right: 20%;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+    }
+    .resultBox{
+        position: absolute;
+        margin-top: 300px;
+        margin-left:10%;
+        margin-right:10%;
+        height: 800px;
+        width: 80%;
+
+    }
+    .img_style{
+        margin-left: 45%;
+        width: 100px;
+        height: 100px;
+        margin-top: 50px;
+    }
+    .company_table{
+        position:absolute;
+        margin-left: 35%;
+        width:500px;
+        height:500px;
+        margin-top: 70px;
+    }
+
+    .newsbox{
+        width: 80%px;
+        height: 120px;
+        background-color: rgb(228, 235, 235);
+    }
+    .chartbox{
+        position: absolute;
+        width: 80%;
+        height: 600px;
+        margin-top: 100px;
+        margin-left: 10%;
+    }
+    table, th, td {
+        border: 1px solid grey;
+        border-left: none;
+        border-right:none;
+        border-collapse: collapse;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 14px;
+        height: 30px;
+    }
+</style>

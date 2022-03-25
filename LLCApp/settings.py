@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'polls.apps.PollsConfig',
     'LLC.apps.LlcConfig',
+    'effect.apps.EffectConfig',
+    'stock.apps.StockConfig',
 ]
 
 MIDDLEWARE = [
