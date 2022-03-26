@@ -180,7 +180,7 @@ def data(request):
 		            plt.figure(figsize=(20, 15))
 		            sns.heatmap(x.corr(), annot=True, cmap='Blues', linewidth=0.3);
 		            plt.title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12);
-		            plt.savefig("./LLCApp/static/effect.png")
+		            plt.savefig("./LLCApp/LLCApp/static/effect.png")
 		    #         correlations = x.corr()
 		    #         print(correlations)
 		    #         sns.heatmap(correlations, annot=True, cmap='Blues', linewidth=0.3)
