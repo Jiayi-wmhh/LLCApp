@@ -1245,7 +1245,7 @@ def effect(request):
 	            plt.figure(figsize=(20, 15))
 	            sns.heatmap(x.corr(), annot=True, cmap='Blues', linewidth=0.3);
 	            plt.title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12);
-	            plt.savefig("./LLCApp/LLCApp//static/effect.png")
+	            plt.savefig("./LLCApp/LLCApp/static/effect.png")
 	    finally:
 	        db.close()
 	return render(request, 'LLCeffect.html',context)
