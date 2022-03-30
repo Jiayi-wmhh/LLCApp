@@ -56,6 +56,8 @@ def graph(request):
 	    	db.close()
 	simplename = []
 	simplevalue = []
+	statename = ['亚洲','欧洲','北美洲','南美洲','非洲','大洋洲']
+	statevalue = [0]*6
 	together = 0.0
 	constract = 0.0
 	for i in range(len(result)):
@@ -65,13 +67,383 @@ def graph(request):
 		if result[i][1] > constract:
 			simplename.append(result[i][0])
 			simplevalue.append(result[i][1])
-	fig = px.pie(values=simplevalue, names=simplename)
+	for i in simplename:
+		index = simplename.index(i)
+		if i=="丹麦":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="俄罗斯":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="刚果共和国":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="印度":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="印度尼西亚":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="土耳其":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="塞拉利昂":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="墨西哥":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="奥地利":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="安提瓜和巴布达":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="尼日利亚":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="尼泊尔":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="巴基斯坦":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="巴西":
+		  statevalue[3] = statevalue[3] + simplevalue[index]
+		elif i=="德国":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="意大利":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="挪威":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="斯里兰卡":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="新加坡":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="新西兰":
+		  statevalue[5] = statevalue[5] + simplevalue[index]
+		elif i=="法国":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="泰国":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="澳大利亚":
+		  statevalue[5] = statevalue[5] + simplevalue[index]
+		elif i=="澳门":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="瑞典":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="瑞士":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="白俄罗斯":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="缅甸":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="肯尼亚":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="芬兰":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="英国":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="荷兰":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="菲律宾":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="越南":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="阿根廷":
+		  statevalue[3] = statevalue[3] + simplevalue[index]
+		elif i=="韩国":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="香港":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="马来西亚":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="中国":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="乌克兰":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="吉尔吉斯斯坦":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="哈萨克斯坦":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="土库曼斯坦":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="波兰":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="加纳":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="卢旺达":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="巴林":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="捷克共和国":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="斯洛文尼亚":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="沙特阿拉伯":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="爱尔兰":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="突尼斯":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="罗马尼亚":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="萨尔瓦多":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="西班牙":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="孟加拉国":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="巴拿马":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="秘鲁":
+		  statevalue[3] = statevalue[3] + simplevalue[index]
+		elif i=="阿尔及利亚":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="冰岛":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="古巴":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="哥伦比亚":
+		  statevalue[3] = statevalue[3] + simplevalue[index]
+		elif i=="埃及":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="安哥拉":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="安道尔":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="巴拉圭":
+		  statevalue[3] = statevalue[3] + simplevalue[index]
+		elif i=="布隆迪":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="文莱":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="格陵兰岛":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="法属波利尼西亚":
+		  statevalue[5] = statevalue[5] + simplevalue[index]
+		elif i=="爱沙尼亚":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="百慕大":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="科威特":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="老挝":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="葡萄牙":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="阿富汗":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="阿拉伯联合酋长国":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="阿曼":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="黎巴嫩":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="乌拉圭":
+		  statevalue[3] = statevalue[3] + simplevalue[index]
+		elif i=="刚果民主共和国":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="坦桑尼亚":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="埃塞俄比亚":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="所罗门群岛":
+		  statevalue[5] = statevalue[5] + simplevalue[index]
+		elif i=="津巴布韦":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="蒙古":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="特立尼达和多巴哥共和国":
+		  statevalue[3] = statevalue[3] + simplevalue[index]
+		elif i=="马达加斯加":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="柬埔寨":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="马耳他":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="科特迪瓦":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="苏里南":
+		  statevalue[3] = statevalue[3] + simplevalue[index]
+		elif i=="保加利亚":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="卡塔尔":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="喀麦隆":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="科摩罗":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="莫桑比克":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="吉布提":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="塞内加尔":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="多米尼克国":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="委内瑞拉":
+		  statevalue[3] = statevalue[3] + simplevalue[index]
+		elif i=="毛里塔尼亚":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="阿塞拜疆":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="阿鲁巴岛":
+		  statevalue[3] = statevalue[3] + simplevalue[index]
+		elif i=="立陶宛":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="哥斯达黎加":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="巴布亚新几内亚":
+		  statevalue[5] = statevalue[5] + simplevalue[index]
+		elif i=="乌兹别克斯坦":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="乌干达":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="克罗地亚":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="几内亚比绍":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="塞浦路斯":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="尼加拉瓜":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="拉脱维亚":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="斯洛伐克":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="格林纳达":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="海地":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="玻利维亚":
+		  statevalue[3] = statevalue[3] + simplevalue[index]
+		elif i=="索马里":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="苏丹":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="阿尔巴尼亚":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="马尔代夫":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="利比亚":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="尼日尔":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="布基纳法索":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="摩尔多瓦":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="摩洛哥":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="格鲁吉亚":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="几内亚":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="厄瓜多尔":
+		  statevalue[3] = statevalue[3] + simplevalue[index]
+		elif i=="多哥":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="毛里求斯":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="马里":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="塔吉克斯坦":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="巴哈马":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="贝宁":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="马拉维":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="多米尼加共和国":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="斐济":
+		  statevalue[5] = statevalue[5] + simplevalue[index]
+		elif i=="洪都拉斯":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="不丹":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="北马其顿共和国":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="波斯尼亚和黑塞哥维那":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="圣卢西亚":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="塞舌尔":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="圭亚那":
+		  statevalue[3] = statevalue[3] + simplevalue[index]
+		elif i=="冈比亚":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="密克罗尼西亚":
+		  statevalue[5] = statevalue[5] + simplevalue[index]
+		elif i=="萨摩亚":
+		  statevalue[5] = statevalue[5] + simplevalue[index]
+		elif i=="圣多美和普林西比":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="巴巴多斯":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="帕劳共和国":
+		  statevalue[5] = statevalue[5] + simplevalue[index]
+		elif i=="比利时":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="卢森堡":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="伯利兹":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="圣文森特和格林纳丁斯":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="汤加":
+		  statevalue[5] = statevalue[5] + simplevalue[index]
+		elif i=="厄立特里亚":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="南非":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="纳米比亚":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="基里巴斯":
+		  statevalue[5] = statevalue[5] + simplevalue[index]
+		elif i=="巴勒斯坦":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="美国":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="博茨瓦纳":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="斯威士兰":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="佛得角":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="危地马拉":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="圣基茨和尼维斯":
+		  statevalue[2] = statevalue[2] + simplevalue[index]
+		elif i=="莱索托":
+		  statevalue[4] = statevalue[4] + simplevalue[index]
+		elif i=="中国台湾":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="东帝汶":
+		  statevalue[0] = statevalue[0] + simplevalue[index]
+		elif i=="塞尔维亚":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="黑山":
+		  statevalue[1] = statevalue[1] + simplevalue[index]
+		elif i=="库拉索":
+		  statevalue[3] = statevalue[3] + simplevalue[index]
+	outerName = []
+	outerValue = []
+	for i in range(len(statevalue)):
+		if statevalue[i]!=0:
+			outerName.append(statename[i])
+			outerValue.append(statevalue[i])
+ 	data = [
+    	go.Pie(values=simplevalue, labels=simplename,
+		domain={'x':[0.23,0.77], 'y':[0.23,0.77]},
+		direction='clockwise',
+		sort=False,
+		),
+
+		go.Pie(values=outerValue, labels=outerName,
+		domain={'x':[0.1,0.9], 'y':[0,1]},
+		hole=0.75,
+		direction='clockwise',
+		sort=False,
+		showlegend=False)]
+
+	fig = go.Figure(data=data)
 	fig.update_traces(textposition='inside')
-	fig.update_layout(uniformtext_minsize=12, uniformtext_mode='hide',
+	fig.update_layout(uniformtext_minsize=9, uniformtext_mode='hide',
                     margin=dict(t=0, b=0, l=0, r=0))
 	plot(fig, validate=False, filename='./LLCApp/templates/simplePieChart.html',
          auto_open=False)
-	fig = px.bar(x=simplename, y=simplevalue)
+	fig = px.bar(x=simplename, y=simplevalue, , color=simplename)
 	plot(fig, validate=False, filename='./LLCApp/templates/simpleBarChart.html',
          auto_open=False)
 	chartname = []
