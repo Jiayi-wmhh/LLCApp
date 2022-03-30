@@ -50,6 +50,8 @@ def graph(request):
 	            # cur.execute('SHOW DATABASES')
 	            startD = Datestart[0:4]
 	            endD = Datestart[0:4]
+	            cur.execute('Select product_name, sum, transaction_year from(Select product_name, sum(total_sales) as sum, transaction_year from trade.sales as temp where export_country="%s" and product_name = "%s" group by transaction_year, product_name order by transaction_year )as res where sum > 0' %(country, product))
+	            data_for_pred = cur.fetchall()		
 	            cur.execute('select import_country, sum(total_sales) as sale from trade.sales where export_country="%s" and product_name = "%s" and transaction_year >= "%s" and transaction_year <= "%s" group by import_country order by sale desc' %(country, product, startD, endD))
 	            result = cur.fetchall()
 	    finally:
