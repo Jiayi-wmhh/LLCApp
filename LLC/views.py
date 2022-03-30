@@ -54,6 +54,73 @@ def graph(request):
 	            result = cur.fetchall()
 	    finally:
 	    	db.close()
+	'''
+	draw the prediction graph
+	'''
+	export_sum = []
+	year = []
+	for i in range(len(data_for_pred)):
+		export_sum.append(data_for_pred[i][1])
+		year.append(data_for_pred[i][2])
+
+	x = np.array(year).reshape((-1, 1))
+	y = np.array(export_sum)
+	polynomial = 1
+	transformer = PolynomialFeatures(degree=polynomial)
+	transformer.fit(x)
+	x_ = transformer.transform(x)
+
+	pred_year = []
+	for i in year:
+		pred_year.append(i)
+	pred_year.append(2021)
+	pred_year.append(2022)   
+
+
+
+	pred_year_ = np.array(pred_year).reshape((-1, 1))
+	transformer.fit(pred_year_)
+	predict_year = transformer.transform(pred_year_)
+
+
+
+	model = LinearRegression().fit(x_, y)
+	pred_sum = model.predict(predict_year)
+
+	fig = go.Figure()              
+
+
+
+	fig.add_trace(
+	    go.Scatter(
+	        x=year,
+    		y=export_sum,
+ 	    	name = "Historical Export Amount"
+    ))
+
+	fig.add_trace(
+    	go.Line(
+        	x=pred_year,
+        	y=pred_sum,
+        	name = "Predicted Export Amount"
+    ))
+	fig.update_layout(
+    	title="Export Amount Prediction with Linear Regression",
+    	xaxis_title="Year",
+    	yaxis_title="Export amount",
+    	legend_title="Line detail",
+    	font=dict(
+        	family="Courier New, monospace",
+        	size=18,
+        	color="RebeccaPurple"
+    	)
+	)
+	plot(fig, validate=False, filename='./LLCApp/templates/prediction.html',
+    auto_open=False)
+
+	'''
+	draw graph ends
+	'''
 	simplename = []
 	simplevalue = []
 	statename = ['亚洲','欧洲','北美洲','南美洲','非洲','大洋洲']
