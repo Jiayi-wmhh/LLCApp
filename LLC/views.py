@@ -10,6 +10,8 @@ import os
 import seaborn as sns
 import pymysql
 from sshtunnel import SSHTunnelForwarder
+from sklearn.linear_model import LinearRegression, Lasso, Ridge
+from sklearn.preprocessing import PolynomialFeatures
 
 def window(request):
 	return render(request, 'window.html')
