@@ -443,7 +443,7 @@ def graph(request):
                     margin=dict(t=0, b=0, l=0, r=0))
 	plot(fig, validate=False, filename='./LLCApp/templates/simplePieChart.html',
          auto_open=False)
-	fig = px.bar(x=simplename, y=simplevalue, , color=simplename)
+	fig = px.bar(x=simplename, y=simplevalue, color=simplename)
 	plot(fig, validate=False, filename='./LLCApp/templates/simpleBarChart.html',
          auto_open=False)
 	chartname = []
