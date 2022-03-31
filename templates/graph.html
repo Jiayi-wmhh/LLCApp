@@ -112,9 +112,8 @@
     </div>
     <div class="content5">
         {% for key, value in terminal %}
-            {% if key != Country && key != Product && key != Start && key != End
-                && key != Percent %}
-            <p>{{ key }} : {{ value }}</p>
+            {% if key != "country" && key != "product" && key != "Datestart" && key != "Dateend" && key != "percent" %}
+                <p>{{ key }} : {{ value }}</p>
         {% endfor %}
     </div>
 </div>
