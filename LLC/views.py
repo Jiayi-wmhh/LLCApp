@@ -111,7 +111,7 @@ def graph(request):
         	name = "Predicted Export Amount"
     ))
 	fig.update_layout(
-    	title="Export Amount Prediction with Linear Regression",
+    	title="Export Prediction with Linear Regression",
     	xaxis_title="Year",
     	yaxis_title="Export amount",
     	legend_title="Line detail",
