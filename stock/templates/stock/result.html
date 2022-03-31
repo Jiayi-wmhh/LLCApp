@@ -27,6 +27,10 @@
                     {% csrf_token %}
                     <input id = "submit" type = "submit" name = "button" value ="Return">
                 </form>
+                <form align = 'center' class = "returnForm" action = "LLC/main" method="post">
+                    {% csrf_token %}
+                    <input id = "submit" type = "submit" name = "button" value ="Main">
+                </form>
             </div>
         </div>
 
