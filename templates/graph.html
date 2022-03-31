@@ -119,7 +119,8 @@
             {% endfor %}
 	        <input id="submit" type="submit" name="button" value="Return">
 	    </form>
-        <form action="homepage" method="post">
+        <form action="" method="post">
+            {% csrf_token %}
             <input id="submit" type="submit" name="button" value="Main">
         </form>
 	</div>
