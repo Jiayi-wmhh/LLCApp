@@ -15,7 +15,7 @@
             <div style="margin-top: 100px;">
                 <h2 align = 'center'>Stock Analysis</p>
                 <h4> Enter Ticker Symbol </h3>
-                <form align = 'center' class = "searchForm" action = "INFOresult" method="post">
+                <form align = 'center' class = "searchForm" action = "result" method="post">
                     {% csrf_token %}
                     <input id = "textBox" type = "text" name = "ticker" placeholder="Enter Ticker Symbol" autocomplete="on" required>
                     <br>
