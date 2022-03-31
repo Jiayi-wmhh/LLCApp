@@ -127,6 +127,7 @@ def graph(request):
 	'''
 	simplename = []
 	simplevalue = []
+	dic = {}
 	statename = ['亚洲','欧洲','北美洲','南美洲','非洲','大洋洲']
 	statevalue = [0]*6
 	together = 0.0
@@ -138,6 +139,8 @@ def graph(request):
 		if result[i][1] > constract:
 			simplename.append(result[i][0])
 			simplevalue.append(result[i][1])
+			dic.update({ result[i][0] : result[i][1]})
+	terminal = {**terminal,**dic}
 	for i in simplename:
 		index = simplename.index(i)
 		if i=="丹麦":
