@@ -88,15 +88,15 @@
         <form action="window" method="post">
 	        {% csrf_token %}
 	        <p id="note">Country</p>
-	        <p>{{ country }}</p></br>
+	        <p>{{ terminal.0["country"] }}</p></br>
 	        <p id="note">Product</p>
-	        <p>{{ product }}</p></br>
+	        <p>{{ terminal.0["product"] }}</p></br>
 	        <p id="note">Start</p>
-	        <p>{{ Datestart }}</p></br>
+	        <p>{{ terminal.0["Datestart"] }}</p></br>
 	        <p id="note">End</p>
-	        <p>{{ Dateend }}</p></br>
+	        <p>{{ terminal.0["Dateend"] }}</p></br>
 	        <p id="note">Percent</p>
-	        <p>{{ percent }}</p></br>
+	        <p>{{ terminal.0["percent"] }}</p></br>
 	        <input id="submit" type="submit" name="button" value="Return">
 	    </form>
 	</div>
@@ -113,7 +113,7 @@
         {% include './prediction.html' %}
     </div>
     <div class="content5">
-        {% for key, value in terminal %}
+        {% for key, value in terminal.1 %}
             <p>{{ value }}</p></br>
         {% endfor %}
     </div>

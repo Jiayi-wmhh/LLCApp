@@ -25,8 +25,9 @@ def graph(request):
 	Datestart = request.POST.get('Datestart')
 	Dateend = request.POST.get('Dateend')
 	percent = request.POST.get('percent')
-	terminal = {"country": country, "product": product, "Datestart": Datestart,
-	"Dateend": Dateend, "percent": percent}
+	terminal = []
+	terminal.append({"country": country, "product": product, "Datestart": Datestart,
+	"Dateend": Dateend, "percent": percent})
 	SSH_BASTION_ADDRESS = '18.221.180.201'  # ここに踏み台のEC2サーバーのIPアドレスを入れる
 	# SSH_PORT = 22
 	SSH_USER = 'ec2-user'
@@ -142,7 +143,7 @@ def graph(request):
 			simplename.append(result[i][0])
 			simplevalue.append(result[i][1])
 			dic.update({ str(i) : result[i] })
-	terminal = {**terminal,**dic}
+	terminal.append(dic)
 	for i in simplename:
 		index = simplename.index(i)
 		if i=="丹麦":
