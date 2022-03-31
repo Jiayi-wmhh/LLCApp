@@ -510,8 +510,7 @@ def graph(request):
 		domain={'x':[0.1,0.9], 'y':[0,1]},
 		hole=0.75,
 		direction='clockwise',
-		sort=False,
-		showlegend=False)]
+		sort=False)]
 
 	fig = go.Figure(data=data)
 	fig.update_traces(textposition='inside')
