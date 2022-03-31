@@ -139,7 +139,7 @@ def graph(request):
 		if result[i][1] > constract:
 			simplename.append(result[i][0])
 			simplevalue.append(result[i][1])
-			dic.update({ result[i][0] : result[i][1]})
+			dic.update({ str(i) : result[i] })
 	terminal = {**terminal,**dic}
 	for i in simplename:
 		index = simplename.index(i)
