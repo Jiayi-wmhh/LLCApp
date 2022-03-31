@@ -70,7 +70,7 @@
     }
     .content5{
         color: black;
-        font-size: 7px;
+        font-size: 9px;
         margin-top: 400px;
         margin-left: 1210px;
         width:170px;
@@ -134,7 +134,10 @@
     </div>
     <div class="content5">
         {% for key, value in terminal %}
-            <p>{{ value }}</p></br>
+            {% if key != "Dateend" && key != "percent" && key != "Datestart"
+            && key != "product" && key != "country"%}
+                <p>{{ value }}</p></br>
+            {% endif %}
         {% endfor %}
     </div>
 </div>
