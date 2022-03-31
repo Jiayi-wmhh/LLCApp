@@ -1617,4 +1617,4 @@ def graph(request):
 	                )
 	plot(fig, validate=False, filename='./LLCApp/templates/fig6.html',
 	     auto_open=False)
-	return render(request, 'graph.html', terminal)
+	return render(request, 'graph.html', {'terminal':terminal.items()})
