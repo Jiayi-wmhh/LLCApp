@@ -120,10 +120,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = './LLCApp/LLCApp/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, './LLCApp/LLCApp/static/')
+STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, './LLCApp/LLCApp/static/')
+STATIC_ROOT = "/home/Jiayi/LLCApp/LLCApp/static"
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, './LLCApp/LLCApp/static/')
+# ]
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, './LLCApp/LLCApp/static/')
+    "/home/Jiayi/LLCApp/LLCApp/static"
 ]
 
 # Default primary key field type
