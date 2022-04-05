@@ -34,10 +34,10 @@
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         position: absolute;
     }
-    label,input,select {
+    select[id="compare1"] {
        margin-top: 250px;
     }
-    input[id="submit"]{
+    input[id="compare"]{
 /*        margin-bottom: 495px;*/
         padding: 7px 25px;
         text-align: center;
@@ -69,7 +69,7 @@
           <form action="data" method="post">
               {% csrf_token %}
               <label for="compare">Country1:</label>
-              <select name="compare1" class="compare1">
+              <select name="compare1" class="compare1" id="compare1">
                   <option value="中国">中国</option>
                   <option value="阿尔巴尼亚">阿尔巴尼亚</option>
                   <option value="阿尔及利亚">阿尔及利亚</option>
