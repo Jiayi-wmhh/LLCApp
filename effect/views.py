@@ -52,6 +52,15 @@ def data(request):
 
 		    try:
 		        with db.cursor() as cur:
+		        	cur.execute('select product_name from trade.sales where export_country="%s" and transaction_year>="%s" and transaction_year<="%s" group by product_name' %(c1, ss, ee))
+		            checkeyTu = cur.fetchall()
+		            for i in pro1:
+		            	A = False
+		            	for j in range(len(checkeyTu)):
+		            		if i == checkeyTu[j][0]:
+		            			A = True
+		            	if A == False:
+		            		return render(request, 'effect_error.html')
 		            arr = {}
 		            cur.execute('select product_name, sum(total_sales)  as sum, transaction_year from trade.sales where export_country="%s" and transaction_year>="%s" and transaction_year<="%s" group by transaction_year, product_name' %(c1, ss, ee))
 		            result1 = cur.fetchall()
