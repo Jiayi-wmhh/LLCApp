@@ -54,6 +54,8 @@ def data(request):
 		        with db.cursor() as cur:
 		        	cur.execute('select product_name from trade.sales where export_country="%s" and transaction_year>="%s" and transaction_year<="%s" group by product_name' %(c1, ss, ee))
 		        	checkeyTu = cur.fetchall()
+		        	if len(pro1) == 0:
+		        		return render(request, 'effect_error.html')
 		        	for i in pro1:
 		        		A = False
 		        		for j in range(len(checkeyTu)):
