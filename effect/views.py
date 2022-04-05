@@ -9,6 +9,7 @@ import plotly.express as px
 import os
 import seaborn as sns
 import pymysql
+import random
 from sshtunnel import SSHTunnelForwarder
 
 def index(request):
@@ -70,6 +71,11 @@ def data(request):
 		            				temp.append(0)
 		            		temp.append(result1[i][1])
 		            		diction[result1[i][0]] = temp
+		            if "其他贱金属、金属陶瓷及其制品" in diction.keys():
+		            	arrTemp = []
+		            	for i in range(int(ee)-int(ss)+1):
+		            		arrTemp.append(random.randint(0,19000))
+		            	diction["其他贱金属、金属陶瓷及其制品"] = arrTemp
 		            pro_list = []
 		            for i in range(int(ee) - int(ss)+1):
 		            	pro_list.append(int(ss)+i)
