@@ -15,20 +15,18 @@
             <div style="margin-top: 100px;">
                 <h2 align = 'center'>Stock Analysis</p>
                 <h4> Enter Ticker Symbol </h3>
-                <form align = 'center' class = "searchForm" action = "result" method="post">
+                <form align = 'center' class = "searchForm" action = "INFOresult" method="post">
                     {% csrf_token %}
                     <input id = "textBox" type = "text" name = "ticker" placeholder="Enter Ticker Symbol" autocomplete="on" required>
                     <br>
                     <input id = "submit" type = "submit" name = "button" value ="Submit">
                 </form>
             </div>
-            <div style="margin-top: 100px; text-align: center; ">
-<!--                 <form align = 'center' class = "returnForm" action = "search" method="post">
+            <div style="margin-top: 100px;">
+                <form align = 'center' class = "returnForm" action = "search" method="post">
                     {% csrf_token %}
                     <input id = "submit" type = "submit" name = "button" value ="Return">
-                </form> -->
-                <a href="https://jiayi.pythonanywhere.com/stock/search" style="color: white; text-decoration:none;">Return</a></br></br>
-                <a href="https://jiayi.pythonanywhere.com/LLC/main" style="color: white; text-decoration:none;">Main</a>
+                </form>
             </div>
         </div>
 
@@ -365,9 +363,6 @@
 </script>
 
 <style>
-    a:hover {
-      background-color: green;
-    }
     .header{
         font-size: 25px;
         border: 1px transparent ;
