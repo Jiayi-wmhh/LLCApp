@@ -62,40 +62,40 @@ def data(request):
 		        		if A == False:
 		        			return render(request, 'effect_error.html')
 		        	arr = {}
-		            cur.execute('select product_name, sum(total_sales)  as sum, transaction_year from trade.sales where export_country="%s" and transaction_year>="%s" and transaction_year<="%s" group by transaction_year, product_name' %(c1, ss, ee))
-		            result1 = cur.fetchall()
-		            diction = {}
-		            for i in range(len(result1)):
-		            	if(result1[i][0] in diction.keys()):
-		            		temp = diction[result1[i][0]]
-		            		if (len(temp) < (result1[i][2] - int(ss))):
-		            			for i in range(result1[i][2] - int(ss)):
-		            				temp.append(0)
-		            			diction[result1[i][0]] = temp
-		            		diction[result1[i][0]].append(result1[i][1])
-		            	else:
-		            		temp = []
-		            		if(result1[i][2]>int(ss)):
-		            			for i in range(result1[i][2] - int(ss)):
-		            				temp.append(0)
-		            		temp.append(result1[i][1])
-		            		diction[result1[i][0]] = temp
-		            if "其他贱金属、金属陶瓷及其制品" in diction.keys():
-		            	arrTemp = []
-		            	for i in range(int(ee)-int(ss)+1):
-		            		arrTemp.append(random.randint(0,19000))
-		            	diction["其他贱金属、金属陶瓷及其制品"] = arrTemp
-		            pro_list = []
-		            for i in range(int(ee) - int(ss)+1):
-		            	pro_list.append(int(ss)+i)
-		            x = {}
-		            for i in range(len(pro1)):
-		            	x.update({str(i+1): diction[pro1[i]]})
-		            y = pd.DataFrame(x)
-		            plt.figure(figsize=(20, 15))
-		            sns.heatmap(y.corr(), annot=True, cmap='Blues', linewidth=0.3);
-		            plt.title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12);
-		            plt.savefig("./LLCApp/LLCApp/static/effect.png")
+		        	cur.execute('select product_name, sum(total_sales)  as sum, transaction_year from trade.sales where export_country="%s" and transaction_year>="%s" and transaction_year<="%s" group by transaction_year, product_name' %(c1, ss, ee))
+		        	result1 = cur.fetchall()
+		        	diction = {}
+		        	for i in range(len(result1)):
+		        		if(result1[i][0] in diction.keys()):
+		        			temp = diction[result1[i][0]]
+		        			if (len(temp) < (result1[i][2] - int(ss))):
+		        				for i in range(result1[i][2] - int(ss)):
+		        					temp.append(0)
+		        				diction[result1[i][0]] = temp
+		        			diction[result1[i][0]].append(result1[i][1])
+		        		else:
+		        			temp = []
+		        			if(result1[i][2]>int(ss)):
+		        				for i in range(result1[i][2] - int(ss)):
+		        					temp.append(0)
+		        			temp.append(result1[i][1])
+		        			diction[result1[i][0]] = temp
+		        	if "其他贱金属、金属陶瓷及其制品" in diction.keys():
+		        		arrTemp = []
+		        		for i in range(int(ee)-int(ss)+1):
+		        			arrTemp.append(random.randint(0,19000))
+		        		diction["其他贱金属、金属陶瓷及其制品"] = arrTemp
+		        	pro_list = []
+		        	for i in range(int(ee) - int(ss)+1):
+		        		pro_list.append(int(ss)+i)
+		        	x = {}
+		        	for i in range(len(pro1)):
+		        		x.update({str(i+1): diction[pro1[i]]})
+		        	y = pd.DataFrame(x)
+		        	plt.figure(figsize=(20, 15))
+		        	sns.heatmap(y.corr(), annot=True, cmap='Blues', linewidth=0.3);
+		        	plt.title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12);
+		        	plt.savefig("./LLCApp/LLCApp/static/effect.png")
 		    finally:
-		        db.close()
+		    	db.close()
 	return render(request, 'effect_corr.html', {'context':context.items()})
