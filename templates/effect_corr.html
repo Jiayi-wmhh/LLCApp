@@ -6,7 +6,7 @@
 	<style>
 		#label{
 	    	position: absolute;
-	        top: 80%;
+	        top: 70%;
 	        left: 83%;
 	    }
 	    p{
@@ -28,12 +28,9 @@
 </div>
 
 <div id="label">
-    <p>1：{{ pro1 }}</p>	
-    <p>2：{{ pro2 }}</p>
-    <p>3：{{ pro3 }}</p>
-    <p>4：{{ pro4 }}</p>
-    <p>5：{{ pro5 }}</p>
-    <p>6：{{ pro6 }}</p>
+    {% for key, value in context %}
+        <p>{{ value }}</p>
+    {% endfor %}
 </div>
 
 </body>
