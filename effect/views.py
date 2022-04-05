@@ -25,7 +25,7 @@ def data(request):
 		pro1 = request.POST.getlist('test')
 		context = {}
 		for i, item in enumerate(pro1):
-			context.update({str(i): item})
+			context.update({str(i+1): item})
 		# context = {"pro1":pro1, "pro2":pro2, "pro3":pro3, "pro4":pro4, "pro5":pro5, "pro6":pro6}
 		SSH_BASTION_ADDRESS = '18.221.180.201'  # ここに踏み台のEC2サーバーのIPアドレスを入れる
 		# SSH_PORT = 22
