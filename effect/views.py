@@ -61,7 +61,7 @@ def data(request):
 		        				A = True
 		        		if A == False:
 		        			return render(request, 'effect_error.html')
-		            arr = {}
+		        	arr = {}
 		            cur.execute('select product_name, sum(total_sales)  as sum, transaction_year from trade.sales where export_country="%s" and transaction_year>="%s" and transaction_year<="%s" group by transaction_year, product_name' %(c1, ss, ee))
 		            result1 = cur.fetchall()
 		            diction = {}
