@@ -83,7 +83,7 @@ def data(request):
 		        	if "其他贱金属、金属陶瓷及其制品" in diction.keys():
 		        		arrTemp = []
 		        		for i in range(int(ee)-int(ss)+1):
-		        			arrTemp.append(random.randint(0,19000))
+		        			arrTemp.append(random.randint(1900,59000))
 		        		diction["其他贱金属、金属陶瓷及其制品"] = arrTemp
 		        	pro_list = []
 		        	for i in range(int(ee) - int(ss)+1):
