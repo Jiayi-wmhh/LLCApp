@@ -25,6 +25,15 @@
 	        text-align:center;
 	        margin-left: 0%;
 	    }
+	    input[id="submit"]{
+	        margin-bottom: 495px;
+	        padding: 7px 25px;
+	        text-align: center;
+	        text-decoration: none;
+	        margin-top: 2px;
+	        margin-bottom: 2px;
+	        color: white;
+	    }
 	    p{
 	    	font-size: 12px;
 	    }
@@ -38,8 +47,10 @@
 </head>
 <body>
 	<div class="container">
-		<a href="https://jiayi.pythonanywhere.com/effect" style="color: white; text-decoration:none; position: absolute; margin-top:300px;">Return</a></br></br>
-        <a href="https://jiayi.pythonanywhere.com/LLC/main" style="color: white; text-decoration:none; ">Main</a>
+		<form action="effect" method="post">
+			<input id="submit" type="submit" name="button" value="Return">
+	    </form>
+        <a href="https://jiayi.pythonanywhere.com/LLC/main" style="color: white; text-decoration:none;">Main</a>
 	</div>
 	<div id="fig4">
 	    <img src="{% static 'effect.png' %}"><br>
