@@ -78,7 +78,7 @@ def data(request):
 		        		else:
 		        			temp = []
 		        			if(result1[i][2]>int(ss)):
-		        				for i in range(result1[i][2] - int(ss)):
+		        				for j in range(result1[i][2] - int(ss)):
 		        					temp.append(0)
 		        			temp.append(result1[i][1])
 		        			diction[result1[i][0]] = temp
