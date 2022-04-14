@@ -103,7 +103,7 @@
 
     function requestCompany(company_info){
         var companyTable = document.getElementById("companyDetail");
-        companyTable.innerHTML = '<div id = "company_img" class = "img_style"><img src = '+company_info["logo"]+ '></div>';
+        companyTable.innerHTML = '<div id = "company_img" class = "img_style"><img src = '+company_info["logo"]+ ' width = "100px" height = "100px"></div>';
         companyTable.innerHTML += '<div id = "company_table"><table style= "width:80%;margin-top:50px; margin-left:10%">'
                                 + '<tr><th> Company Name</th><td>'+company_info["name"] + '</td>'
                                 + '<tr><th> Stock Ticker Symbol</th><td>'+company_info["ticker"] + '</td>'
@@ -237,18 +237,22 @@
         var news_table = document.getElementById("news");
         var count = 0;
         var i = 0;
-        while(count < 6){
+        var num = 6;
+        if (news_info.length < 6){
+            num = news_info.length - 1;
+        }
+        while(count < num){
             if(news_info[i]["image"]){
                 news_table.innerHTML += '<div class = "smnewsbox" style ="margin-top:10px;">'
                                     + '<img src="'+news_info[i]["image"]+'" width = "100px" height = "100px" style = "margin-top:10px; margin-left:10px;">'
                                     + '<div style = "margin-left:120px; margin-top:-110px;height:120px;width:70%; position: absolute;font-family: Verdana, Geneva, Tahoma, sans-serif;">'
-                                    + '<h1  style = "font-size:14px;text-aglin:vertical-align;" >'+news_info[i]["headline"]+'</h1>'
+                                    + '<h1  style = "font-size:12px;text-aglin:vertical-align;" >'+news_info[i]["headline"]+'</h1>'
                                     + '<p  style = "font-weight:normal;font-size:14px;text-aglin:vertical-align;" >'+ToLocalDate(news_info[i]["datetime"])+'</p>'
                                     + '<a href='+news_info[i]["url"]+' style = "color:blue">See Original Post</a>'
                                     +'</div></div>';        
-                count ++;        
+                        
             }
-        
+            count ++;
             i++;
         }
     }
@@ -344,7 +348,6 @@
         "#00aba9",
         "#2b5797"
         ];
-        console.log(yValues)
         new Chart("myChart1", {
         type: "pie",
         data: {
@@ -453,7 +456,7 @@
     }
 
     .smnewsbox{
-        width: 80%px;
+        width: 100%;
         height: 120px;
         background-color: rgb(228, 235, 235);
     }
