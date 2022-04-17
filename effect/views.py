@@ -84,7 +84,7 @@ def data(request):
 		        			diction[result1[i][0]] = temp
 		        	for key in diction:
 		        		if len(diction[key]) < (ee - ss + 1):
-		        			for rr in range(ee - ss + 1 - len(diction[key])):
+		        			for rr in range(int(ee) - int(ss) + 1 - len(diction[key])):
 		        				temp = diction[key]
 		        				temp.append(0)
 		        				diction[key] = temp
