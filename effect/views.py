@@ -68,10 +68,10 @@ def data(request):
 		        	result1 = cur.fetchall()
 		        	diction = {}
 		        	for i in range(len(result1)):
-		        		if(result1[i][0] in diction.keys()):
+		        		if result1[i][0] in diction.keys():
 		        			temp = diction[result1[i][0]]
-		        			if (len(temp) < (result1[i][2] - int(ss))):
-		        				for i in range(result1[i][2] - int(ss)):
+		        			if len(temp) < (result1[i][2] - int(ss)):
+		        				for k in range((result1[i][2]-int(ss))-len(temp)):
 		        					temp.append(0)
 		        				diction[result1[i][0]] = temp
 		        			diction[result1[i][0]].append(result1[i][1])
@@ -82,6 +82,12 @@ def data(request):
 		        					temp.append(0)
 		        			temp.append(result1[i][1])
 		        			diction[result1[i][0]] = temp
+		        	for key in diction:
+		        		if len(diction[key]) < (ee - ss + 1):
+		        			for rr in range(ee - ss + 1 - len(diction[key])):
+		        				temp = diction[key]
+		        				temp.append(0)
+		        				diction[key] = temp
 		        	if "其他贱金属、金属陶瓷及其制品" in diction.keys():
 		        		arrTemp = []
 		        		for i in range(int(ee)-int(ss)+1):
