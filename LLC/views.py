@@ -58,6 +58,8 @@ def graph(request):
 	            data_for_pred = cur.fetchall()		
 	            cur.execute('select import_country, sum(total_sales) as sale from trade.sales where export_country="%s" and product_name = "%s" and transaction_year >= "%s" and transaction_year <= "%s" group by import_country order by sale desc' %(country, product, startD, endD))
 	            result = cur.fetchall()
+	            if len(result) == 0:
+		        		return render(request, 'effect_error.html')
 	    finally:
 	    	db.close()
 	'''
@@ -136,7 +138,7 @@ def graph(request):
 	constract = 0.0
 	for i in range(len(result)):
 		together = together+result[i][1]
-	constract = together * (int(percent)/100)
+	constract = together * (float(percent)/100)
 	for i in range(len(result)):
 		if result[i][1] > constract:
 			simplename.append(result[i][0])
