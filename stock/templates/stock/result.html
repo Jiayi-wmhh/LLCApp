@@ -262,8 +262,12 @@
         twitter_json = JSON.parse(twitter_json)
         var data_size =  twitter_json.length
         var i = 0;
+        var strong_pos_num = 0;
         var pos_num = 0;
+        var weak_pos_num = 0;
+        var strong_neg_num = 0;
         var neg_num = 0;
+        var weak_neg_num = 0;
         var neu_num= 0;
         let result_table = document.getElementById("twitter_table");
         while(i < data_size - 1){
@@ -274,11 +278,23 @@
 
             result_table.innerHTML += '<tr><th>' + twitter_json[i]["compound"] + '</th><th>'  +twitter_json[i]["text"]+'</th><tr>';
             let val = twitter_json[i]["compound"]
-            if (val < 0){
+            if (val >-0.33 && val < 0){
+                weak_neg_num++;
+            }
+            else if (val > - 0.7 && val <= - 0.33){
                 neg_num++;
             }
-            else if(val >0){
+            else if (val <= - 7){
+                strong_neg_num++;
+            }
+            else if(val > 0 & val < 0.33){
+                weak_pos_num++;
+            }
+            else if(val >= 0.33 & val < 0.7){
                 pos_num++;
+            }
+            else if(val >= 0.7){
+                strong_pos_num++;
             }
             else{
                 neu_num++;
@@ -286,12 +302,16 @@
             i++;
         }
         //chart
-        var xValues = ["Postive", "Neutral", "Negative"];
-        var yValues = [pos_num,neu_num,neg_num];
+        var xValues = ["Strongly Positive","Postive","Weakly Positive", "Neutral", "Weakly Negative", "Negative","Strongly Negative"];
+        var yValues = [strong_pos_num,pos_num,weak_pos_num,neu_num,weak_neg_num,neg_num,strong_neg_num];
         var barColors = [
-        "#b91d47",
-        "#00aba9",
-        "#2b5797"
+        "#228B22",
+        "#7CFC00",
+        "#AFE1AF",
+        "#DFFF00",
+        "#F88379",
+        "#D2042D",
+        "#880808"
         ];
         console.log(yValues)
         new Chart("myChart", {
@@ -307,7 +327,11 @@
             title: {
             display: true,
             text: "Twitter Sentimental Analysis Result Chart " + twitter_json[0]["ticker"]
-            }
+            },
+            legend: {
+                display: true,
+                position: 'right',
+            }    
         }
         });
     }
@@ -317,8 +341,12 @@
         finfiz_json = JSON.parse(finfiz_json)
         var data_size =  finfiz_json.length
         var i = 0;
+        var strong_pos_num = 0;
         var pos_num = 0;
+        var weak_pos_num = 0;
+        var strong_neg_num = 0;
         var neg_num = 0;
+        var weak_neg_num = 0;
         var neu_num= 0;
         let result_table = document.getElementById("finviz_table");
         while(i < data_size - 1){
@@ -329,11 +357,23 @@
             result_table.innerHTML += '<tr><th>' + finfiz_json[i]["compound"] + '</th><th>'  +finfiz_json[i]["text"]+'</th><tr>';
 
             let val = finfiz_json[i]["compound"]
-            if (val < 0){
+            if (val >-0.33 && val < 0){
+                weak_neg_num++;
+            }
+            else if (val > - 0.7 && val <= - 0.33){
                 neg_num++;
             }
-            else if(val >0){
+            else if (val <= - 7){
+                strong_neg_num++;
+            }
+            else if(val > 0 & val < 0.33){
+                weak_pos_num++;
+            }
+            else if(val >= 0.33 & val < 0.7){
                 pos_num++;
+            }
+            else if(val >= 0.7){
+                strong_pos_num++;
             }
             else{
                 neu_num++;
@@ -341,12 +381,16 @@
             i++;
         }
         //chart
-        var xValues = ["Postive", "Neutral", "Negative"];
-        var yValues = [pos_num,neu_num,neg_num];
+        var xValues = ["Strongly Positive","Postive","Weakly Positive", "Neutral", "Weakly Negative", "Negative","Strongly Negative"];
+        var yValues = [strong_pos_num,pos_num,weak_pos_num,neu_num,weak_neg_num,neg_num,strong_neg_num];
         var barColors = [
-        "#b91d47",
-        "#00aba9",
-        "#2b5797"
+        "#228B22",
+        "#7CFC00",
+        "#AFE1AF",
+        "#DFFF00",
+        "#F88379",
+        "#D2042D",
+        "#880808"
         ];
         new Chart("myChart1", {
         type: "pie",
@@ -361,7 +405,12 @@
             title: {
             display: true,
             text: "Finviz Sentimental Analysis Result Chart " + finfiz_json[0]["ticker"]
-            }
+            },
+            legend: {
+                display: true,
+                position: 'right',
+
+            }   
         }
         });
     }
