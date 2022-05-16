@@ -36,16 +36,6 @@
         margin-bottom: 2px;
         color: white;
     }
-    a {
-        margin-bottom: 495px;
-        padding: 7px 25px;
-        text-align: center;
-        text-decoration: none;
-        background-color: #34B33D; /* Green */
-        margin-top: 2px;
-        margin-bottom: 2px;
-        color: white;
-    }
     .content1{
         margin-top: 0px;
         margin-left: 150px;
@@ -129,7 +119,10 @@
             {% endfor %}
 	        <input id="submit" type="submit" name="button" value="Return">
 	    </form>
-        <a href="http://www.thehemanllc2022.com" style="color: white; text-decoration:none;">Main</a>
+        <form action="main" method="post">
+            {% csrf_token %}
+            <input id="submit" type="submit" name="button" value="Main">
+        </form>
 	</div>
 	<div class="content1">
         {% include './simplePieChart.html' %}
