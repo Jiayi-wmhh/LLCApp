@@ -22,6 +22,7 @@ def search(request):
 def result(request):
     ticker = request.POST.get('ticker')
     ticker = str(ticker).upper()
+    tweet_num = request.POST.get('tweetNumber')
     apikey = "&token=c8kjg9qad3ibbdm3takg"
     res = []
 
@@ -67,7 +68,7 @@ def result(request):
     res.append(resp4)
     
     # twitter
-    num_twitter = 100
+    num_twitter = tweet_num
     # change bearer token when the company account is created
     bearer_token = "AAAAAAAAAAAAAAAAAAAAAM48aAEAAAAAi%2FLi%2ByJN40pC0y39uAGACG8joMw%3DWSvLjUQofW6rPSZoNaC9QWdJQfXy8EtTWdaUSIFePc4VWyT4mP"
     url = "https://api.twitter.com/2/tweets/search/recent?query="+ticker+"&max_results="+str(num_twitter)
