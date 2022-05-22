@@ -131,6 +131,9 @@ def graph(request):
 	'''
 	simplename = []
 	simplevalue = []
+	chartname = []
+	chartvalue = []
+	chartcode = []
 	dic = {}
 	statename = ['亚洲','欧洲','北美洲','南美洲','非洲','大洋洲']
 	statevalue = [0]*6
@@ -143,358 +146,534 @@ def graph(request):
 		if result[i][1] > constract:
 			simplename.append(result[i][0])
 			simplevalue.append(result[i][1])
+			chartname.append(result[i][0])
+			chartvalue.append(result[i][1])
 			dic.update({ str(i) : result[i] })
 	terminal = {**terminal,**dic}
 	for i in simplename:
 		index = simplename.index(i)
 		if i=="丹麦":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("DNK")
 		elif i=="俄罗斯":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("RUS")
 		elif i=="刚果共和国":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("COD")
 		elif i=="印度":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("IND")
 		elif i=="印度尼西亚":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("IDN")
 		elif i=="土耳其":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("TUR")
 		elif i=="塞拉利昂":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("WAL")
 		elif i=="墨西哥":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("MEX")
 		elif i=="奥地利":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("AUT")
 		elif i=="安提瓜和巴布达":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("ATG")
 		elif i=="尼日利亚":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("NGA")
 		elif i=="尼泊尔":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("NPL")
 		elif i=="巴基斯坦":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("PAK")
 		elif i=="巴西":
 		  statevalue[3] = statevalue[3] + simplevalue[index]
+		  chartcode.append("BRA")
 		elif i=="德国":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("DEU")
 		elif i=="意大利":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("ITA")
 		elif i=="挪威":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("NOR")
 		elif i=="斯里兰卡":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("LKA")
 		elif i=="新加坡":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("SGP")
 		elif i=="新西兰":
 		  statevalue[5] = statevalue[5] + simplevalue[index]
+		  chartcode.append("NZL")
 		elif i=="法国":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("FRA")
 		elif i=="泰国":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("THA")
 		elif i=="澳大利亚":
 		  statevalue[5] = statevalue[5] + simplevalue[index]
+		  chartcode.append("AUS")
 		elif i=="澳门":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("MAC")
 		elif i=="瑞典":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("SWE")
 		elif i=="瑞士":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("CHE")
 		elif i=="白俄罗斯":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("BLR")
 		elif i=="缅甸":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("MMR")
 		elif i=="肯尼亚":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("EAK")
 		elif i=="芬兰":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("FIN")
 		elif i=="英国":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("GBR")
 		elif i=="荷兰":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("NLD")
 		elif i=="菲律宾":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("PHI")
 		elif i=="越南":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("VDR")
 		elif i=="阿根廷":
 		  statevalue[3] = statevalue[3] + simplevalue[index]
+		  chartcode.append("ARG")
 		elif i=="韩国":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("KOR")
 		elif i=="香港":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("HKG")
 		elif i=="马来西亚":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("MYS")
 		elif i=="中国":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("CHN")
 		elif i=="乌克兰":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("UKR")
 		elif i=="吉尔吉斯斯坦":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("KGZ")
 		elif i=="哈萨克斯坦":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("KAZ")
 		elif i=="土库曼斯坦":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("TKM")
 		elif i=="波兰":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("POL")
 		elif i=="加纳":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("GHA")
 		elif i=="卢旺达":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("RWA")
 		elif i=="巴林":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("BHR")
 		elif i=="捷克共和国":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("CZE")
 		elif i=="斯洛文尼亚":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("SVN")
 		elif i=="沙特阿拉伯":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("SAU")
 		elif i=="爱尔兰":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("IRL")
 		elif i=="突尼斯":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("TUN")
 		elif i=="罗马尼亚":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("ROM")
 		elif i=="萨尔瓦多":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("SLV")
 		elif i=="西班牙":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("ESP")
 		elif i=="孟加拉国":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("BGD")
 		elif i=="巴拿马":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("PAN")
 		elif i=="秘鲁":
 		  statevalue[3] = statevalue[3] + simplevalue[index]
+		  chartcode.append("PER")
 		elif i=="阿尔及利亚":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("DZA")
 		elif i=="冰岛":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("ISL")
 		elif i=="古巴":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("CUB")
 		elif i=="哥伦比亚":
 		  statevalue[3] = statevalue[3] + simplevalue[index]
+		  chartcode.append("COL")
 		elif i=="埃及":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("EGY")
 		elif i=="安哥拉":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("AGO")
 		elif i=="安道尔":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("AND")
 		elif i=="巴拉圭":
 		  statevalue[3] = statevalue[3] + simplevalue[index]
+		  chartcode.append("PRY")
 		elif i=="布隆迪":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("BDI")
 		elif i=="文莱":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("BRU")
 		elif i=="格陵兰岛":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("GRL")
 		elif i=="法属波利尼西亚":
 		  statevalue[5] = statevalue[5] + simplevalue[index]
+		  chartcode.append("PYF")
 		elif i=="爱沙尼亚":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("EST")
 		elif i=="百慕大":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("BMU")
 		elif i=="科威特":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("KWT")
 		elif i=="老挝":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("LAO")
 		elif i=="葡萄牙":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("PRT")
 		elif i=="阿富汗":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("AFG")
 		elif i=="阿拉伯联合酋长国":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("ARE")
 		elif i=="阿曼":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("OMN")
 		elif i=="黎巴嫩":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("LBN")
 		elif i=="乌拉圭":
 		  statevalue[3] = statevalue[3] + simplevalue[index]
+		  chartcode.append("URY")
 		elif i=="刚果民主共和国":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("COD")
 		elif i=="坦桑尼亚":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("TZA")
 		elif i=="埃塞俄比亚":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("ETH")
 		elif i=="所罗门群岛":
 		  statevalue[5] = statevalue[5] + simplevalue[index]
+		  chartcode.append("SLB")
 		elif i=="津巴布韦":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("ZWE")
 		elif i=="蒙古":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("MNG")
 		elif i=="特立尼达和多巴哥共和国":
 		  statevalue[3] = statevalue[3] + simplevalue[index]
+		  chartcode.append("TTD")
 		elif i=="马达加斯加":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("MDG")
 		elif i=="柬埔寨":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("KHM")
 		elif i=="马耳他":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("MLT")
 		elif i=="科特迪瓦":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("CIV")
 		elif i=="苏里南":
 		  statevalue[3] = statevalue[3] + simplevalue[index]
+		  chartcode.append("SUR")
 		elif i=="保加利亚":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("BGR")
 		elif i=="卡塔尔":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("QAT")
 		elif i=="喀麦隆":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("CMR")
 		elif i=="科摩罗":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("COM")
 		elif i=="莫桑比克":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("MOZ")
 		elif i=="吉布提":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("DJI")
 		elif i=="塞内加尔":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("SEN")
 		elif i=="多米尼克国":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("DMA")
 		elif i=="委内瑞拉":
 		  statevalue[3] = statevalue[3] + simplevalue[index]
+		  chartcode.append("VEN")
 		elif i=="毛里塔尼亚":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("MRT")
 		elif i=="阿塞拜疆":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("AZE")
 		elif i=="阿鲁巴岛":
 		  statevalue[3] = statevalue[3] + simplevalue[index]
+		  chartcode.append("ABW")
 		elif i=="立陶宛":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("LTU")
 		elif i=="哥斯达黎加":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("CRI")
 		elif i=="巴布亚新几内亚":
 		  statevalue[5] = statevalue[5] + simplevalue[index]
+		  chartcode.append("PNG")
 		elif i=="乌兹别克斯坦":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("UZB")
 		elif i=="乌干达":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("EAU")
 		elif i=="克罗地亚":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("HRV")
 		elif i=="几内亚比绍":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("GNB")
 		elif i=="塞浦路斯":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("CYP")
 		elif i=="尼加拉瓜":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("NIC")
 		elif i=="拉脱维亚":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("LVA")
 		elif i=="斯洛伐克":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("SVK")
 		elif i=="格林纳达":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("GRD")
 		elif i=="海地":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("HTI")
 		elif i=="玻利维亚":
 		  statevalue[3] = statevalue[3] + simplevalue[index]
+		  chartcode.append("BOL")
 		elif i=="索马里":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("SOM")
 		elif i=="苏丹":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("SDN")
 		elif i=="阿尔巴尼亚":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("ALB")
 		elif i=="马尔代夫":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("MDV")
 		elif i=="利比亚":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("LBY")
 		elif i=="尼日尔":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("NER")
 		elif i=="布基纳法索":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("BFA")
 		elif i=="摩尔多瓦":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("MDA")
 		elif i=="摩洛哥":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("MAR")
 		elif i=="格鲁吉亚":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("GEO")
 		elif i=="几内亚":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("GIN")
 		elif i=="厄瓜多尔":
 		  statevalue[3] = statevalue[3] + simplevalue[index]
+		  chartcode.append("ECU")
 		elif i=="多哥":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("TGO")
 		elif i=="毛里求斯":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("MUS")
 		elif i=="马里":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("RMM")
 		elif i=="塔吉克斯坦":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("TJK")
 		elif i=="巴哈马":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("BHS")
 		elif i=="贝宁":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("BEN")
 		elif i=="马拉维":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("MWI")
 		elif i=="多米尼加共和国":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("DOM")
 		elif i=="斐济":
 		  statevalue[5] = statevalue[5] + simplevalue[index]
+		  chartcode.append("FJI")
 		elif i=="洪都拉斯":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("HND")
 		elif i=="不丹":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("BTN")
 		elif i=="北马其顿共和国":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("MKD")
 		elif i=="波斯尼亚和黑塞哥维那":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("BIH")
 		elif i=="圣卢西亚":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("LCA")
 		elif i=="塞舌尔":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("SYC")
 		elif i=="圭亚那":
 		  statevalue[3] = statevalue[3] + simplevalue[index]
+		  chartcode.append("GUY")
 		elif i=="冈比亚":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("WAG")
 		elif i=="密克罗尼西亚":
 		  statevalue[5] = statevalue[5] + simplevalue[index]
+		  chartcode.append("FSM")
 		elif i=="萨摩亚":
 		  statevalue[5] = statevalue[5] + simplevalue[index]
+		  chartcode.append("WSM")
 		elif i=="圣多美和普林西比":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("STP")
 		elif i=="巴巴多斯":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("BDS")
 		elif i=="帕劳共和国":
 		  statevalue[5] = statevalue[5] + simplevalue[index]
+		  chartcode.append("PLW")
 		elif i=="比利时":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("BEL")
 		elif i=="卢森堡":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("LUX")
 		elif i=="伯利兹":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("BLZ")
 		elif i=="圣文森特和格林纳丁斯":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("VCT")
 		elif i=="汤加":
 		  statevalue[5] = statevalue[5] + simplevalue[index]
+		  chartcode.append("TON")
 		elif i=="厄立特里亚":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("ERI")
 		elif i=="南非":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("ZAF")
 		elif i=="纳米比亚":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("NAM")
 		elif i=="基里巴斯":
 		  statevalue[5] = statevalue[5] + simplevalue[index]
+		  chartcode.append("KIR")
 		elif i=="巴勒斯坦":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("PSE")
 		elif i=="美国":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("USA")
 		elif i=="博茨瓦纳":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("BWA")
 		elif i=="斯威士兰":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("SWZ")
 		elif i=="佛得角":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("CPV")
 		elif i=="危地马拉":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("GTM")
 		elif i=="圣基茨和尼维斯":
 		  statevalue[2] = statevalue[2] + simplevalue[index]
+		  chartcode.append("KNA")
 		elif i=="莱索托":
 		  statevalue[4] = statevalue[4] + simplevalue[index]
+		  chartcode.append("LSO")
 		elif i=="中国台湾":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("TWN")
 		elif i=="东帝汶":
 		  statevalue[0] = statevalue[0] + simplevalue[index]
+		  chartcode.append("TMP")
 		elif i=="塞尔维亚":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("SRB")
 		elif i=="黑山":
 		  statevalue[1] = statevalue[1] + simplevalue[index]
+		  chartcode.append("MNE")
 		elif i=="库拉索":
 		  statevalue[3] = statevalue[3] + simplevalue[index]
+		  chartcode.append("CUW")
 	outerName = []
 	outerValue = []
 	for i in range(len(statevalue)):
@@ -523,362 +702,7 @@ def graph(request):
 	fig = px.bar(x=simplename, y=simplevalue, color=simplename)
 	plot(fig, validate=False, filename='./LLCApp/templates/simpleBarChart.html',
          auto_open=False)
-	chartname = []
-	chartvalue = []
-	for i in range(len(result)):
-		chartname.append(result[i][0])
-		chartvalue.append(result[i][1])
-	chartcode = []
-	for i in chartname:
-		if i=="丹麦":
-		  chartcode.append("DNK")
-		elif i=="俄罗斯":
-		  chartcode.append("RUS")
-		elif i=="刚果共和国":
-		  chartcode.append("COD")
-		elif i=="印度":
-		  chartcode.append("IND")
-		elif i=="印度尼西亚":
-		  chartcode.append("IDN")
-		elif i=="土耳其":
-		  chartcode.append("TUR")
-		elif i=="塞拉利昂":
-		  chartcode.append("WAL")
-		elif i=="墨西哥":
-		  chartcode.append("MEX")
-		elif i=="奥地利":
-		  chartcode.append("AUT")
-		elif i=="安提瓜和巴布达":
-		  chartcode.append("ATG")
-		elif i=="尼日利亚":
-		  chartcode.append("NGA")
-		elif i=="尼泊尔":
-		  chartcode.append("NPL")
-		elif i=="巴基斯坦":
-		  chartcode.append("PAK")
-		elif i=="巴西":
-		  chartcode.append("BRA")
-		elif i=="德国":
-		  chartcode.append("DEU")
-		elif i=="意大利":
-		  chartcode.append("ITA")
-		elif i=="挪威":
-		  chartcode.append("NOR")
-		elif i=="斯里兰卡":
-		  chartcode.append("LKA")
-		elif i=="新加坡":
-		  chartcode.append("SGP")
-		elif i=="新西兰":
-		  chartcode.append("NZL")
-		elif i=="法国":
-		  chartcode.append("FRA")
-		elif i=="泰国":
-		  chartcode.append("THA")
-		elif i=="澳大利亚":
-		  chartcode.append("AUS")
-		elif i=="澳门":
-		  chartcode.append("MAC")
-		elif i=="瑞典":
-		  chartcode.append("SWE")
-		elif i=="瑞士":
-		  chartcode.append("CHE")
-		elif i=="白俄罗斯":
-		  chartcode.append("BLR")
-		elif i=="缅甸":
-		  chartcode.append("MMR")
-		elif i=="肯尼亚":
-		  chartcode.append("EAK")
-		elif i=="芬兰":
-		  chartcode.append("FIN")
-		elif i=="英国":
-		  chartcode.append("GBR")
-		elif i=="荷兰":
-		  chartcode.append("NLD")
-		elif i=="菲律宾":
-		  chartcode.append("PHI")
-		elif i=="越南":
-		  chartcode.append("VDR")
-		elif i=="阿根廷":
-		  chartcode.append("ARG")
-		elif i=="韩国":
-		  chartcode.append("KOR")
-		elif i=="香港":
-		  chartcode.append("HKG")
-		elif i=="马来西亚":
-		  chartcode.append("MYS")
-		elif i=="中国":
-		  chartcode.append("CHN")
-		elif i=="乌克兰":
-		  chartcode.append("UKR")
-		elif i=="吉尔吉斯斯坦":
-		  chartcode.append("KGZ")
-		elif i=="哈萨克斯坦":
-		  chartcode.append("KAZ")
-		elif i=="土库曼斯坦":
-		  chartcode.append("TKM")
-		elif i=="波兰":
-		  chartcode.append("POL")
-		elif i=="加纳":
-		  chartcode.append("GHA")
-		elif i=="卢旺达":
-		  chartcode.append("RWA")
-		elif i=="巴林":
-		  chartcode.append("BHR")
-		elif i=="捷克共和国":
-		  chartcode.append("CZE")
-		elif i=="斯洛文尼亚":
-		  chartcode.append("SVN")
-		elif i=="沙特阿拉伯":
-		  chartcode.append("SAU")
-		elif i=="爱尔兰":
-		  chartcode.append("IRL")
-		elif i=="突尼斯":
-		  chartcode.append("TUN")
-		elif i=="罗马尼亚":
-		  chartcode.append("ROM")
-		elif i=="萨尔瓦多":
-		  chartcode.append("SLV")
-		elif i=="西班牙":
-		  chartcode.append("ESP")
-		elif i=="孟加拉国":
-		  chartcode.append("BGD")
-		elif i=="巴拿马":
-		  chartcode.append("PAN")
-		elif i=="秘鲁":
-		  chartcode.append("PER")
-		elif i=="阿尔及利亚":
-		  chartcode.append("DZA")
-		elif i=="冰岛":
-		  chartcode.append("ISL")
-		elif i=="古巴":
-		  chartcode.append("CUB")
-		elif i=="哥伦比亚":
-		  chartcode.append("COL")
-		elif i=="埃及":
-		  chartcode.append("EGY")
-		elif i=="安哥拉":
-		  chartcode.append("AGO")
-		elif i=="安道尔":
-		  chartcode.append("AND")
-		elif i=="巴拉圭":
-		  chartcode.append("PRY")
-		elif i=="布隆迪":
-		  chartcode.append("BDI")
-		elif i=="文莱":
-		  chartcode.append("BRU")
-		elif i=="格陵兰岛":
-		  chartcode.append("GRL")
-		elif i=="法属波利尼西亚":
-		  chartcode.append("PYF")
-		elif i=="爱沙尼亚":
-		  chartcode.append("EST")
-		elif i=="百慕大":
-		  chartcode.append("BMU")
-		elif i=="科威特":
-		  chartcode.append("KWT")
-		elif i=="老挝":
-		  chartcode.append("LAO")
-		elif i=="葡萄牙":
-		  chartcode.append("PRT")
-		elif i=="阿富汗":
-		  chartcode.append("AFG")
-		elif i=="阿拉伯联合酋长国":
-		  chartcode.append("ARE")
-		elif i=="阿曼":
-		  chartcode.append("OMN")
-		elif i=="黎巴嫩":
-		  chartcode.append("LBN")
-		elif i=="乌拉圭":
-		  chartcode.append("URY")
-		elif i=="刚果民主共和国":
-		  chartcode.append("COD")
-		elif i=="坦桑尼亚":
-		  chartcode.append("TZA")
-		elif i=="埃塞俄比亚":
-		  chartcode.append("ETH")
-		elif i=="所罗门群岛":
-		  chartcode.append("SLB")
-		elif i=="津巴布韦":
-		  chartcode.append("ZWE")
-		elif i=="蒙古":
-		  chartcode.append("MNG")
-		elif i=="特立尼达和多巴哥共和国":
-		  chartcode.append("TTD")
-		elif i=="马达加斯加":
-		  chartcode.append("MDG")
-		elif i=="柬埔寨":
-		  chartcode.append("KHM")
-		elif i=="马耳他":
-		  chartcode.append("MLT")
-		elif i=="科特迪瓦":
-		  chartcode.append("CIV")
-		elif i=="苏里南":
-		  chartcode.append("SUR")
-		elif i=="保加利亚":
-		  chartcode.append("BGR")
-		elif i=="卡塔尔":
-		  chartcode.append("QAT")
-		elif i=="喀麦隆":
-		  chartcode.append("CMR")
-		elif i=="科摩罗":
-		  chartcode.append("COM")
-		elif i=="莫桑比克":
-		  chartcode.append("MOZ")
-		elif i=="吉布提":
-		  chartcode.append("DJI")
-		elif i=="塞内加尔":
-		  chartcode.append("SEN")
-		elif i=="多米尼克国":
-		  chartcode.append("DMA")
-		elif i=="委内瑞拉":
-		  chartcode.append("VEN")
-		elif i=="毛里塔尼亚":
-		  chartcode.append("MRT")
-		elif i=="阿塞拜疆":
-		  chartcode.append("AZE")
-		elif i=="阿鲁巴岛":
-		  chartcode.append("ABW")
-		elif i=="立陶宛":
-		  chartcode.append("LTU")
-		elif i=="哥斯达黎加":
-		  chartcode.append("CRI")
-		elif i=="巴布亚新几内亚":
-		  chartcode.append("PNG")
-		elif i=="乌兹别克斯坦":
-		  chartcode.append("UZB")
-		elif i=="乌干达":
-		  chartcode.append("EAU")
-		elif i=="克罗地亚":
-		  chartcode.append("HRV")
-		elif i=="几内亚比绍":
-		  chartcode.append("GNB")
-		elif i=="塞浦路斯":
-		  chartcode.append("CYP")
-		elif i=="尼加拉瓜":
-		  chartcode.append("NIC")
-		elif i=="拉脱维亚":
-		  chartcode.append("LVA")
-		elif i=="斯洛伐克":
-		  chartcode.append("SVK")
-		elif i=="格林纳达":
-		  chartcode.append("GRD")
-		elif i=="海地":
-		  chartcode.append("HTI")
-		elif i=="玻利维亚":
-		  chartcode.append("BOL")
-		elif i=="索马里":
-		  chartcode.append("SOM")
-		elif i=="苏丹":
-		  chartcode.append("SDN")
-		elif i=="阿尔巴尼亚":
-		  chartcode.append("ALB")
-		elif i=="马尔代夫":
-		  chartcode.append("MDV")
-		elif i=="利比亚":
-		  chartcode.append("LBY")
-		elif i=="尼日尔":
-		  chartcode.append("NER")
-		elif i=="布基纳法索":
-		  chartcode.append("BFA")
-		elif i=="摩尔多瓦":
-		  chartcode.append("MDA")
-		elif i=="摩洛哥":
-		  chartcode.append("MAR")
-		elif i=="格鲁吉亚":
-		  chartcode.append("GEO")
-		elif i=="几内亚":
-		  chartcode.append("GIN")
-		elif i=="厄瓜多尔":
-		  chartcode.append("ECU")
-		elif i=="多哥":
-		  chartcode.append("TGO")
-		elif i=="毛里求斯":
-		  chartcode.append("MUS")
-		elif i=="马里":
-		  chartcode.append("RMM")
-		elif i=="塔吉克斯坦":
-		  chartcode.append("TJK")
-		elif i=="巴哈马":
-		  chartcode.append("BHS")
-		elif i=="贝宁":
-		  chartcode.append("BEN")
-		elif i=="马拉维":
-		  chartcode.append("MWI")
-		elif i=="多米尼加共和国":
-		  chartcode.append("DOM")
-		elif i=="斐济":
-		  chartcode.append("FJI")
-		elif i=="洪都拉斯":
-		  chartcode.append("HND")
-		elif i=="不丹":
-		  chartcode.append("BTN")
-		elif i=="北马其顿共和国":
-		  chartcode.append("MKD")
-		elif i=="波斯尼亚和黑塞哥维那":
-		  chartcode.append("BIH")
-		elif i=="圣卢西亚":
-		  chartcode.append("LCA")
-		elif i=="塞舌尔":
-		  chartcode.append("SYC")
-		elif i=="圭亚那":
-		  chartcode.append("GUY")
-		elif i=="冈比亚":
-		  chartcode.append("WAG")
-		elif i=="密克罗尼西亚":
-		  chartcode.append("FSM")
-		elif i=="萨摩亚":
-		  chartcode.append("WSM")
-		elif i=="圣多美和普林西比":
-		  chartcode.append("STP")
-		elif i=="巴巴多斯":
-		  chartcode.append("BDS")
-		elif i=="帕劳共和国":
-		  chartcode.append("PLW")
-		elif i=="比利时":
-		  chartcode.append("BEL")
-		elif i=="卢森堡":
-		  chartcode.append("LUX")
-		elif i=="伯利兹":
-		  chartcode.append("BLZ")
-		elif i=="圣文森特和格林纳丁斯":
-		  chartcode.append("VCT")
-		elif i=="汤加":
-		  chartcode.append("TON")
-		elif i=="厄立特里亚":
-		  chartcode.append("ERI")
-		elif i=="南非":
-		  chartcode.append("ZAF")
-		elif i=="纳米比亚":
-		  chartcode.append("NAM")
-		elif i=="基里巴斯":
-		  chartcode.append("KIR")
-		elif i=="巴勒斯坦":
-		  chartcode.append("PSE")
-		elif i=="美国":
-		  chartcode.append("USA")
-		elif i=="博茨瓦纳":
-		  chartcode.append("BWA")
-		elif i=="斯威士兰":
-		  chartcode.append("SWZ")
-		elif i=="佛得角":
-		  chartcode.append("CPV")
-		elif i=="危地马拉":
-		  chartcode.append("GTM")
-		elif i=="圣基茨和尼维斯":
-		  chartcode.append("KNA")
-		elif i=="莱索托":
-		  chartcode.append("LSO")
-		elif i=="中国台湾":
-		  chartcode.append("TWN")
-		elif i=="东帝汶":
-		  chartcode.append("TMP")
-		elif i=="塞尔维亚":
-		  chartcode.append("SRB")
-		elif i=="黑山":
-		  chartcode.append("MNE")
-		elif i=="库拉索":
-		  chartcode.append("CUW")
-		fig = go.Figure(data=go.Choropleth(
+	fig = go.Figure(data=go.Choropleth(
 		locations = chartcode,
 		z = chartvalue,
 		colorscale = 'Blues',
@@ -886,7 +710,7 @@ def graph(request):
 		# reversescale=True,
 		marker_line_color='darkgray',
 		marker_line_width=0.5,
-  ))
+    ))
 	fig.update_layout(width=830, height=400,)
 	plot(fig, validate=False, filename='./LLCApp/templates/fig4.html',
          auto_open=False)
