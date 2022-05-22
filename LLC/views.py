@@ -131,8 +131,6 @@ def graph(request):
 	'''
 	simplename = []
 	simplevalue = []
-	chartname = []
-	chartvalue = []
 	chartcode = []
 	dic = {}
 	statename = ['亚洲','欧洲','北美洲','南美洲','非洲','大洋洲']
@@ -146,8 +144,6 @@ def graph(request):
 		if result[i][1] > constract:
 			simplename.append(result[i][0])
 			simplevalue.append(result[i][1])
-			chartname.append(result[i][0])
-			chartvalue.append(result[i][1])
 			dic.update({ str(i) : result[i] })
 	terminal = {**terminal,**dic}
 	for i in simplename:
@@ -704,7 +700,7 @@ def graph(request):
          auto_open=False)
 	fig = go.Figure(data=go.Choropleth(
 		locations = chartcode,
-		z = chartvalue,
+		z = simplevalue,
 		colorscale = 'Blues',
 		autocolorscale=False,
 		# reversescale=True,
