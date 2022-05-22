@@ -139,8 +139,8 @@
     <div class="content5">
         {% for key, value in terminal %}
             {% if key != "Dateend" and key != "percent" and key != "Datestart" and key != "product" and key != "country"%}
-                {{ str1 = str(value) }}
-                {{ str = str1[2: len(value)] }}
+                {% str1 = str(value) %}
+                {% str = str1[2: len(value)] %}
                 <p>{{ str[0: str.index('\'')] }}</p>
                 }
             {% endif %}
