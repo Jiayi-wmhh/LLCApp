@@ -87,33 +87,25 @@
     <div class="container">
         <form action="window" method="post">
 	        {% csrf_token %}
-	        <p id="note">Country</p>
             {% for key, value in terminal %}
                 {% if key == "country" %}
+                    <p id="note">Country</p>
                     <p>{{ value }}</p>
                 {% endif %}
-            {% endfor %}
-            <p id="note">Product</p>
-            {% for key, value in terminal %}
                 {% if key == "product" %}
+                    <p id="note">Product</p>
                     <p>{{ value }}</p>
                 {% endif %}
-            {% endfor %}
-            <p id="note">Start</p>
-            {% for key, value in terminal %}
                 {% if key == "Datestart" %}
+                    <p id="note">Start</p>
                     <p>{{ value }}</p>
                 {% endif %}
-            {% endfor %}
-            <p id="note">End</p>
-            {% for key, value in terminal %}
                 {% if key == "Dateend" %}
+                    <p id="note">End</p>
                     <p>{{ value }}</p>
                 {% endif %}
-            {% endfor %}
-            <p id="note">Percent</p>
-            {% for key, value in terminal %}
                 {% if key == "percent" %}
+                    <p id="note">Percent</p>
                     <p>{{ value }}</p>
                 {% endif %}
             {% endfor %}
