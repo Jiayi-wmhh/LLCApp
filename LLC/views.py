@@ -119,7 +119,7 @@ def graph(request):
     	legend_title="Line detail",
     	font=dict(
         	family="Courier New, monospace",
-        	size=16,
+        	size=14,
         	color="RebeccaPurple"
     	)
 	)
