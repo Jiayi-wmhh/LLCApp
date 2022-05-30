@@ -707,7 +707,7 @@ def graph(request):
 		marker_line_color='darkgray',
 		marker_line_width=0.5,
     ))
-	fig.update_layout(width=750, height=550,)
+	fig.update_layout(width=750, height=550, margin=dict(t=0, b=0, l=0, r=0))
 	plot(fig, validate=False, filename='./LLCApp/templates/fig4.html',
          auto_open=False)
 	return render(request, 'graph.html', {'terminal':terminal.items()})
