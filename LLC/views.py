@@ -119,7 +119,7 @@ def graph(request):
     	legend_title="Line detail",
     	font=dict(
         	family="Courier New, monospace",
-        	size=18,
+        	size=16,
         	color="RebeccaPurple"
     	)
 	)
@@ -707,7 +707,7 @@ def graph(request):
 		marker_line_color='darkgray',
 		marker_line_width=0.5,
     ))
-	fig.update_layout(width=700, height=500,)
+	fig.update_layout(width=750, height=550,)
 	plot(fig, validate=False, filename='./LLCApp/templates/fig4.html',
          auto_open=False)
 	return render(request, 'graph.html', {'terminal':terminal.items()})
