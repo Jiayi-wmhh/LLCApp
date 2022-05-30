@@ -26,6 +26,16 @@
     #note{
         color: black;
     }
+    .linkTo{
+        text-align: center;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 20px;
+        text-decoration: none;
+        /*background-color: #777;*/ /* Green */
+        margin-top: 8px;
+        margin-bottom: 8px;
+        color: white;
+    }
     input[id="submit"]{
         margin-bottom: 495px;
         padding: 7px 25px;
@@ -124,10 +134,12 @@
             {% endfor %}
 	        <input id="submit" type="submit" name="button" value="Return">
 	    </form>
-        <form action="main" method="post">
-            {% csrf_token %}
-            <input id="submit" type="submit" name="button" value="Main">
-        </form>
+        <div class = "linkTo">
+            <a href="http://www.thehemanllc2022.com/effect/prime" style="color: white; text-decoration:none;">Correlation Analysis</a>
+        </div>
+        <div class = "linkTo">
+            <a href="http://www.thehemanllc2022.com/stock/search" style="color: white; text-decoration:none;">Stock Analysis</a>
+        </div>
 	</div>
 	<div class="content1">
         {% include './simplePieChart.html' %}
