@@ -56,17 +56,19 @@
         color: black;
         font-size: 10px;
         margin-top: 0px;
-        margin-left: 1080px;
-        width:300px;
-        height:400px;     
+        margin-left: 1120px;
+        width:260px;
+        height:400px;   
+        white-space: nowrap;
+        overflow: hidden;  
 /*        border: 1px solid green;  */
         position: absolute;
     }
     .content4{
-        margin-top: 400px;
+        margin-top: 420px;
         margin-left: 140px;
         width:630px;
-        height:400px;     
+        height:380px;     
 /*        border: 1px solid green; */ 
         position: absolute;
     }
@@ -77,6 +79,17 @@
         height:400px;     
 /*        border: 1px solid green;  */
         position: absolute;
+    }
+    .overflow-visible {
+      white-space: initial;
+    }
+
+    .overflow-clip {
+      text-overflow: clip;
+    }
+
+    .overflow-ellipsis {
+      text-overflow: ellipsis;
     }
 </style>
 
