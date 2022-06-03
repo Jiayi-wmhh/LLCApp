@@ -19,7 +19,7 @@
                     {% csrf_token %}
                     <input id = "textBox" type = "text" name = "ticker" placeholder="Enter Ticker Symbol" autocomplete="on" required>
                     <br>
-                    <input id = "textBox" type = "text" name = "SArate" placeholder="SA affect rate" autocomplete="on" required>
+                    <input id = "textBox" type = "text" name = "tweetNumber" placeholder="Enter Tweets Number" autocomplete="on" required>
                     <input id = "submit" type = "submit" name = "button" value ="Submit">
                 </form>
             </div>
@@ -44,10 +44,6 @@
 
         </div>
         <div class = "newsBox" id = "news" >
-
-        </div>
-        <div class= "predBox" id = "pred">
-                <canvas id="myChart2" ></canvas>                
 
         </div>
         <div class = "SAheader">
@@ -99,11 +95,12 @@
     requestNews(company_news_json)
     var company_charts_json = JSON.parse('{{ Result.3 | escapejs }}');
     requestTable(company_charts_json)
+    var company_charts_json = JSON.parse('{{ Result.3 | escapejs }}');
 
     //draw pie chart
     drawTwitter()
     drawFinviz()
-    drawPrediction()
+
 
     function requestCompany(company_info){
         var companyTable = document.getElementById("companyDetail");
@@ -418,32 +415,6 @@
         }
         });
     }
-
-    function drawPrediction(){
-        var predict = JSON.parse('{{ Result.6 | escapejs }}')
-        var xValues = ["Day1","Day2","Day3","Day4","Day5","Day6","Day7"];
-
-        new Chart("myChart2", {
-            type: "line",
-            data: {
-                labels: xValues,
-                datasets: [{
-                fill: false,
-                lineTension: 0,
-                backgroundColor: "rgba(0,0,255,1.0)",
-                borderColor: "rgba(0,0,255,0.1)",
-                data: predict
-                }]
-            },
-            options: {
-                legend: {display: false},
-                title: {
-                display: true,
-                text: "Stock Price Prediction in One Week"
-                },
-            }	
-        });
-    }
 </script>
 
 <style>
@@ -545,15 +516,8 @@
         margin-top: 0px;
         margin-left: 1000px;
         width:600px;
-        height:400px;
+        height:800px;
 
-    }
-    .predBox{
-        position: absolute;
-        margin-top: 400px;
-        margin-left: 1000px;
-        width:600px;
-        height:400px;
     }
 
     .chartBox{
