@@ -75,7 +75,7 @@ def graph(request):
 		marr.append(data_for_pred[i])
 	if len(data_for_pred)>=24:
 		dff = pd.DataFrame(marr, columns = ['Product', 'detail', 'year'])
-		plt.figure(figsize=(6.8, 2.8))
+		plt.figure(figsize=(6.6, 2.8))
 		month = seasonal_decompose(dff['detail'], model='multiplicable', period=12)
 		plt.title('Seasonal Graph')
 		month.seasonal.plot()
@@ -85,7 +85,7 @@ def graph(request):
 		plt.savefig("./LLCApp/LLCApp/static/trend.png")
 	elif len(data_for_pred)<24:
 		dff = pd.DataFrame(marr, columns = ['Product', 'detail', 'year'])
-		plt.figure(figsize=(6.8, 2.8))
+		plt.figure(figsize=(6.6, 2.8))
 		month = seasonal_decompose(dff['detail'], model='multiplicable', period=1)
 		plt.title('Seasonal Graph')
 		month.seasonal.plot()
