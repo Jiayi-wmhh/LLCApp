@@ -78,9 +78,9 @@ def graph(request):
 		plt.figure(figsize=(20, 15))
 		month = seasonal_decompose(dff['detail'], model='multiplicable', period=12)
 		month.seasonal.plot()
-		plt.savefig("./LLCApp/static/month.png")
+		plt.savefig("./LLCApp/LLCApp/static/month.png")
 		month.trend.plot()
-		plt.savefig("./LLCApp/static/trend.png")
+		plt.savefig("./LLCApp/LLCApp/static/trend.png")
 	elif len(data_for_pred)<24:
 		dff = pd.DataFrame(marr, columns = ['Product', 'detail', 'year'])
 		plt.figure(figsize=(20, 15))
