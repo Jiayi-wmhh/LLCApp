@@ -89,10 +89,10 @@ def graph(request):
 		month = seasonal_decompose(dff['detail'], model='multiplicable', period=1)
 		plt.title('Seasonal Graph')
 		month.seasonal.plot()
-		plt.savefig("./LLCApp/static/month.png")
+		plt.savefig("./LLCApp/LLCApp/static/month.png")
 		plt.title('Trend Graph')
 		month.trend.plot()
-		plt.savefig("./LLCApp/static/trend.png")
+		plt.savefig("./LLCApp/LLCApp/static/trend.png")
 	x = np.array(year).reshape((-1, 1))
 	y = np.array(export_sum)
 	polynomial = 1
