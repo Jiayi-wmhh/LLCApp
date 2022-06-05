@@ -7,7 +7,7 @@
         margin-top: 0px;
         margin-left: 0px;
         width:1380px;
-        height:900px; 
+        height:1000px; 
         display:inline-block;
 /*        border: 3px solid gray;*/
     }
@@ -16,7 +16,7 @@
         color: white;
         text-align: center; 
         width:200px;
-        height:900px;   
+        height:1000px;   
 /*        border: 1px solid black; */
         background-color: #34B33D;
         text-align:center;
@@ -95,6 +95,22 @@
         margin-left: 820px;
         width:520px;
         height:400px;     
+/*        border: 1px solid green;  */
+        position: absolute;
+    }
+    .content6{
+        margin-top: 800px;
+        margin-left: 200px;
+        width:540px;
+        height:200px;     
+/*        border: 1px solid green; */ 
+        position: absolute;
+    }
+    .content7{
+        margin-top: 800px;
+        margin-left: 740px;
+        width:540px;
+        height:200px;     
 /*        border: 1px solid green;  */
         position: absolute;
     }
@@ -470,6 +486,12 @@
                 <p>{{ value }}</p>
             {% endif %}
         {% endfor %}
+    </div>
+    <div class="content6">
+        <img src="{% static 'month.png' %}"><br>
+    </div>
+    <div class="content7">
+        <img src="{% static 'trend.png' %}"><br>
     </div>
 </div>
 

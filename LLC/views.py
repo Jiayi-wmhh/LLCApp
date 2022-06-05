@@ -67,10 +67,27 @@ def graph(request):
 	'''
 	export_sum = []
 	year = []
+	marr = []
 	for i in range(len(data_for_pred)):
 		export_sum.append(data_for_pred[i][1])
 		year.append(data_for_pred[i][2])
-
+		marr.append(data_for_pred[i])
+	if len(data_for_pred)>=24:
+		dff = pd.DataFrame(marr, columns = ['Product', 'detail', 'year'])
+		plt.figure(figsize=(20, 15))
+		month = seasonal_decompose(dff['detail'], model='multiplicable', period=12)
+		month.seasonal.plot()
+		plt.savefig("./LLCApp/static/month.png")
+		month.trend.plot()
+		plt.savefig("./LLCApp/static/trend.png")
+	elif len(data_for_pred)<24:
+		dff = pd.DataFrame(marr, columns = ['Product', 'detail', 'year'])
+		plt.figure(figsize=(20, 15))
+		month = seasonal_decompose(dff['detail'], model='multiplicable', period=1)
+		month.seasonal.plot()
+		plt.savefig("./LLCApp/static/month.png")
+		month.trend.plot()
+		plt.savefig("./LLCApp/static/trend.png")
 	x = np.array(year).reshape((-1, 1))
 	y = np.array(export_sum)
 	polynomial = 1
