@@ -28,8 +28,15 @@
                     {% csrf_token %}
                     <input id = "submit" type = "submit" name = "button" value ="Return">
                 </form> -->
-                <a href="http://www.thehemanllc2022.com/stock/search" style="color: white; text-decoration:none;">Return</a></br></br>
-                <a href="http://www.thehemanllc2022.com/LLC/main" style="color: white; text-decoration:none;">Main</a>
+                <div class = "linkTo">
+                    <a href="http://www.thehemanllc2022.com/LLC/window" style="color: white; text-decoration:none;">Trade Analysis</a>
+                </div>
+                <div class = "linkTo">
+                    <a href="http://www.thehemanllc2022.com/effect/prime" style="color: white; text-decoration:none;">Correlation Analysis</a>
+                </div>
+                <div class = "linkTo">
+                    <a href="http://www.thehemanllc2022.com/stock/search" style="color: white; text-decoration:none;">Stock Analysis</a>
+                </div>
             </div>
         </div>
 
@@ -449,9 +456,6 @@
 </script>
 
 <style>
-    a:hover {
-      background-color: green;
-    }
     .header{
         font-size: 25px;
         border: 1px transparent ;
@@ -487,7 +491,7 @@
         border-radius: 10px;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         font-weight: bolder;
-        background-color: rgb(94, 91, 109);
+        background-color: #34B33D;
         color: white;
     }
 
@@ -501,7 +505,7 @@
         padding: 7px 25px;
         text-align: center;
         text-decoration: none;
-        background-color: darkgray; /* Green */
+        background-color: #777; /* Green */
         margin-top: 2px;
         margin-bottom: 2px;
         color: white;
@@ -556,6 +560,22 @@
         margin-left: 1000px;
         width:600px;
         height:400px;
+    }
+
+    .linkTo{
+        text-align: center;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 20px;
+        text-decoration: none;
+        /*background-color: #777;*/ /* Green */
+        margin-top: 8px;
+        margin-bottom: 8px;
+        color: white;
+        font-weight: normal;
+    }
+
+    a:hover{
+        background-color: #A1CDEF;
     }
 
     .chartBox{
