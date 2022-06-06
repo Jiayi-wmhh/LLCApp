@@ -19,7 +19,7 @@
                     {% csrf_token %}
                     <input id = "textBox" type = "text" name = "ticker" placeholder="Enter Ticker Symbol" autocomplete="on" required>
                     <br>
-                    <input id = "textBox" type = "text" name = "tweetNumber" placeholder="Enter Tweets Number" autocomplete="on" required>
+                    <input id = "textBox" type = "text" name = "SArate" placeholder="SA affect rate" autocomplete="on" required>
                     <input id = "submit" type = "submit" name = "button" value ="Submit">
                 </form>
             </div>
@@ -28,15 +28,8 @@
                     {% csrf_token %}
                     <input id = "submit" type = "submit" name = "button" value ="Return">
                 </form> -->
-                <div class = "linkTo">
-                    <a href="http://www.thehemanllc2022.com/LLC/window" style="color: white; text-decoration:none;">Trade Analysis</a>
-                </div>
-                <div class = "linkTo">
-                    <a href="http://www.thehemanllc2022.com/effect/prime" style="color: white; text-decoration:none;">Correlation Analysis</a>
-                </div>
-                <div class = "linkTo">
-                    <a href="http://www.thehemanllc2022.com/stock/search" style="color: white; text-decoration:none;">Stock Analysis</a>
-                </div>
+                <a href="http://www.thehemanllc2022.com/stock/search" style="color: white; text-decoration:none;">Return</a></br></br>
+                <a href="http://www.thehemanllc2022.com/LLC/main" style="color: white; text-decoration:none;">Main</a>
             </div>
         </div>
 
@@ -51,6 +44,10 @@
 
         </div>
         <div class = "newsBox" id = "news" >
+
+        </div>
+        <div class= "predBox" id = "pred">
+                <canvas id="myChart2" ></canvas>                
 
         </div>
         <div class = "SAheader">
@@ -102,12 +99,11 @@
     requestNews(company_news_json)
     var company_charts_json = JSON.parse('{{ Result.3 | escapejs }}');
     requestTable(company_charts_json)
-    var company_charts_json = JSON.parse('{{ Result.3 | escapejs }}');
 
     //draw pie chart
     drawTwitter()
     drawFinviz()
-
+    drawPrediction()
 
     function requestCompany(company_info){
         var companyTable = document.getElementById("companyDetail");
@@ -123,11 +119,13 @@
     }
 
     function requestSummary(summary_info){
+        console.log(summary_info)
         var summaryTable = document.getElementById("summary");
         summaryTable.innerHTML += '<div id = "summary_table"><table style= "width:80%;margin-top:70px;margin-left:10%;">'
                                 + '<tr><th> Trading Day</th><td id = "today">'+ToLocalDate(summary_info["t"]) + '</td>'
                                 + '<tr><th> Previous Closing Price</th><td>'+summary_info["pc"] + '</td>'
                                 + '<tr><th> Opening Price</th><td>'+summary_info["o"] + '</td>'
+                                + '<tr><th> Current Price</th><td>'+summary_info["c"] + '</td>'
                                 + '<tr><th> High Price</th><td>'+summary_info["h"] + '</td>'
                                 + '<tr><th> Low Price</th><td>'+summary_info["l"] + '</td>'
                                 + '<tr><th> Change</th><td id = "change">'+summary_info["d"] + '</td>'
@@ -245,8 +243,8 @@
         var news_table = document.getElementById("news");
         var count = 0;
         var i = 0;
-        var num = 6;
-        if (news_info.length < 6){
+        var num = 3;
+        if (news_info.length < 3){
             num = news_info.length - 1;
         }
         while(count < num){
@@ -422,6 +420,32 @@
         }
         });
     }
+
+    function drawPrediction(){
+        var predict = JSON.parse('{{ Result.6 | escapejs }}')
+        var xValues = ["Next Day1","Next Day2","Next Day3","Next Day4","Next Day5","Next Day6","Next Day7"];
+
+        new Chart("myChart2", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,0,255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: predict
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                display: true,
+                text: "Stock Price Prediction in next seven days"
+                },
+            }	
+        });
+    }
 </script>
 
 <style>
@@ -463,7 +487,7 @@
         border-radius: 10px;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         font-weight: bolder;
-        background-color: #34B33D;
+        background-color: rgb(94, 91, 109);
         color: white;
     }
 
@@ -477,7 +501,7 @@
         padding: 7px 25px;
         text-align: center;
         text-decoration: none;
-        background-color: 777; /* Green */
+        background-color: darkgray; /* Green */
         margin-top: 2px;
         margin-bottom: 2px;
         color: white;
@@ -512,22 +536,6 @@
 
     }
 
-    .linkTo{
-        text-align: center;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 20px;
-        text-decoration: none;
-        /*background-color: #777;*/ /* Green */
-        margin-top: 8px;
-        margin-bottom: 8px;
-        color: white;
-        font-weight: normal;
-    }
-
-    a:hover{
-        background-color: #A1CDEF;
-    }
-
     .smnewsbox{
         width: 100%;
         height: 120px;
@@ -539,8 +547,15 @@
         margin-top: 0px;
         margin-left: 1000px;
         width:600px;
-        height:800px;
+        height:400px;
 
+    }
+    .predBox{
+        position: absolute;
+        margin-top: 400px;
+        margin-left: 1000px;
+        width:600px;
+        height:400px;
     }
 
     .chartBox{

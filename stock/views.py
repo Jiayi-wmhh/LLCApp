@@ -14,6 +14,22 @@ import json
 from datetime import date,timedelta
 from dateutil.relativedelta import *
 import time
+import yfinance as yf
+import math
+import matplotlib.pyplot as plt
+import keras
+import numpy as np
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import LSTM
+from keras.layers import Dropout
+from keras.layers import *
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
+from sklearn.model_selection import train_test_split
+from keras.callbacks import EarlyStopping
+import datetime
 # Create your views here.
 
 def search(request):
@@ -22,7 +38,12 @@ def search(request):
 def result(request):
     ticker = request.POST.get('ticker')
     ticker = str(ticker).upper()
-    tweet_num = request.POST.get('tweetNumber')
+    tweet_num = 100
+    start_date = '2020-01-01'
+    epoch_num = 50
+    affect_rate = request.POST.get('SArate')
+    affect_rate = float(affect_rate)
+    print(affect_rate)
     apikey = "&token=c8kjg9qad3ibbdm3takg"
     res = []
 
@@ -99,6 +120,12 @@ def result(request):
     # Join the DataFrames of the news and the list of dicts
     df = df.join(scores_df, rsuffix='_right')
     result = df.to_json(orient = "records")
+
+    weight_sum = 0
+    for i in range(df.shape[0]):
+        weight_sum += df["compound"][i] / df.shape[0]
+    print(weight_sum)
+
     result_json = json.dumps(result)
     res.append(result_json)
 
@@ -170,5 +197,182 @@ def result(request):
     parsed_and_scored_news = parsed_and_scored_news.to_json(orient = "records")
     result_json = json.dumps(parsed_and_scored_news)
     res.append(result_json)
+
+    
+    # LSTM Model Part
+
+    # Read historic stock data from yfinance
+    yf_Res = yf.Ticker(ticker)
+    df = yf_Res.history(period="10y",start=start_date, interval='1d')
+    df.reset_index(inplace=True)
+    data_types_dict = {'Date': str}
+    df = df.astype(data_types_dict)
+
+    print('Number of rows and columns:', df.shape)
+
+
+    data_len = df.shape[0]
+    split_point = round(data_len * 0.9)
+    print('Number of split point',split_point)
+
+    training_set = df.iloc[:data_len, 1:2].values
+    # in performance measurement part use code below
+    # training_set = df.iloc[:split_point, 1:2].values
+
+    test_set = df.iloc[split_point:, 1:2].values
+
+
+    # Feature Scaling
+    sc = MinMaxScaler(feature_range = (0, 1))
+    training_set_scaled = sc.fit_transform(training_set)
+    # Creating a data structure with 60 time-steps and 1 output
+    X_train = []
+    y_train = []
+    for i in range(60, split_point):
+        X_train.append(training_set_scaled[i-60:i, 0])
+        y_train.append(training_set_scaled[i, 0])
+    X_train, y_train = np.array(X_train), np.array(y_train)
+    X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
+
+    print('Shape of Training set',X_train.shape)
+
+
+
+    model = Sequential()
+    #Adding the first LSTM layer and some Dropout regularisation
+    model.add(LSTM(units = 50, return_sequences = True, input_shape = (X_train.shape[1], 1)))
+    model.add(Dropout(0.2))
+    # Adding a second LSTM layer and some Dropout regularisation
+    model.add(LSTM(units = 50, return_sequences = True))
+    model.add(Dropout(0.2))
+    # Adding a third LSTM layer and some Dropout regularisation
+    model.add(LSTM(units = 50, return_sequences = True))
+    model.add(Dropout(0.2))
+    # Adding a fourth LSTM layer and some Dropout regularisation
+    model.add(LSTM(units = 50))
+    model.add(Dropout(0.2))
+    # Adding the output layer
+    model.add(Dense(units = 1))
+
+    # Compiling the RNN
+    model.compile(optimizer = 'adam', loss = 'mean_squared_error')
+
+    # Fitting the RNN to the Training set
+    model.fit(X_train, y_train, epochs = epoch_num, batch_size = 32)
+
+
+    # test the model with data after split point
+
+    dataset_train = df.iloc[:split_point, 1:2]
+    dataset_test = df.iloc[split_point:, 1:2]
+    dataset_total = pd.concat((dataset_train, dataset_test), axis = 0)
+    '''
+    temp = dataset_total.shape[0] - dataset_test.shape[0] - 60
+    inputs = dataset_total[temp:].values
+    inputs = inputs.reshape(-1,1)
+    inputs = sc.transform(inputs)
+    X_test = []
+    for i in range(60, data_len-split_point+60):
+        X_test.append(inputs[i-60:i, 0])
+    X_test = np.array(X_test)
+    X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
+    print('Shape of Testing set',X_test.shape)
+
+
+    predicted_stock_price = model.predict(X_test)
+    predicted_stock_price = sc.inverse_transform(predicted_stock_price)
+
+
+    pred_res = []
+    for i in range(predicted_stock_price.shape[0]):
+        pred_res.append(predicted_stock_price[i][0])
+    '''
+
+    #  Perfomance measurement part
+    '''
+    TPos = 0
+    FNeg = 0
+    FPos = 0
+    TNeg = 0
+
+    for i in range(len(pred_res) - 1):
+        act_diff = dataset_test.values[i+1][0] - dataset_test.values[i][0]
+        pred_diff = pred_res[i+1] - pred_res[i]
+        if act_diff >= 0 and pred_diff >= 0:
+            TPos = TPos + 1
+        elif act_diff <= 0 and pred_diff >= 0:
+            FNeg = FNeg + 1
+        elif act_diff >= 0 and pred_diff <= 0:
+            FPos = FPos + 1
+        else:
+            TNeg = TNeg + 1
+
+    precision = TPos / (TPos + FPos)
+    recall = TPos / (TPos + FNeg)
+    accuracy = (TPos + TNeg)/(TPos + TNeg + FNeg + FPos)
+    f_score = 2 * precision * recall / (precision + recall)
+
+    print("Precision: " + str(precision))
+    print("Recall: " + str(recall))
+    print("Accuracy: " + str(accuracy))
+    print("F Score: " + str(f_score))
+
+
+    plt.plot(df.loc[split_point:, 'Date'],dataset_test.values, color = 'red', label = 'Real TESLA Stock Price')
+    plt.plot(df.loc[split_point:, 'Date'],pred_res, color = 'blue', label = 'Predicted TESLA Stock Price')
+    plt.xticks(np.arange(0,X_test.shape[0],300))
+    plt.title('TESLA Stock Price Prediction')
+    plt.xlabel('Time')
+    plt.ylabel('TESLA Stock Price')
+    plt.legend()
+    plt.show()
+
+    inputs = dataset_total[dataset_total.shape[0] - 60:].values
+    print(inputs)
+    inputs = inputs.reshape(-1,1)
+    inputs = sc.transform(inputs)
+    input_pred = []
+    input_pred.append(inputs[:60, 0])
+    input_pred = np.array(input_pred)
+    input_pred = np.reshape(input_pred, (input_pred.shape[0], input_pred.shape[1], 1))
+    predicted_stock_price = model.predict(input_pred)
+    predicted_stock_price = sc.inverse_transform(predicted_stock_price)
+    print(str(ticker) + ":Prediction of Stock Price in future one day is: " + str(predicted_stock_price[0][0]))
+    '''
+    temp_list = []
+    result = []
+
+    inputs = dataset_total[dataset_total.shape[0] - 60:].values
+    inputs = inputs.reshape(-1,1)
+    inputs = sc.transform(inputs)
+
+
+    input_pred = []
+    input_pred.append(inputs[:60, 0])
+    input_pred = np.array(input_pred)
+    function = 1 + (weight_sum * affect_rate)
+    input_pred[0][59] = input_pred[0][59] * function
+    input_pred = np.reshape(input_pred, (input_pred.shape[0], input_pred.shape[1], 1))
+    predicted_stock_price = model.predict(input_pred)
+    temp_list.append(predicted_stock_price[0][0])
+    predicted_stock_price = sc.inverse_transform(predicted_stock_price)
+
+    result.append(predicted_stock_price[0][0])
+
+
+    for i in range(1,7):
+        input_pred = []
+        input_pred.append(inputs[i:60, 0])
+        input_pred[0] = np.append(input_pred,temp_list)
+        input_pred = np.array(input_pred)
+        input_pred = np.reshape(input_pred, (input_pred.shape[0], input_pred.shape[1], 1))
+
+        predicted_stock_price = model.predict(input_pred)
+        temp_list.append(predicted_stock_price[0][0])
+        predicted_stock_price = sc.inverse_transform(predicted_stock_price)
+        result.append(predicted_stock_price[0][0])
+
+    print(result)
+    res.append(result)
 
     return render(request,"stock/result.html",{ "Result":res }) 
