@@ -69,19 +69,17 @@ def graph(request):
 	export_sum = []
 	year = []
 	marr = []
-	x = [1,2,3,4,5,6,7,8,9,10,11,12]
-	y = [0, 1, 2, 3]
 	for i in range(len(data_for_pred)):
 		export_sum.append(data_for_pred[i][1])
 		year.append(data_for_pred[i][2])
 		marr.append(data_for_pred[i])
 	if len(data_for_pred)>=24:
 		dff = pd.DataFrame(marr, columns = ['Product', 'detail', 'year'])
+		plt.xticks([1,2,3,4,5,6,7,8,9,10,11,12])
 		plt.figure(figsize=(6.6, 2.6))
 		month = seasonal_decompose(dff['detail'], model='multiplicable', period=5)
 		plt.title('Seasonal Graph')
-		# plt.xticks([1,2,3,4,5,6,7,8,9,10,11,12])
-		month.seasonal.plot(x, y)
+		month.seasonal.plot()
 		plt.savefig("./LLCApp/LLCApp/static/month.png")
 		plt.title('Trend Graph')
 		month.trend.plot()
