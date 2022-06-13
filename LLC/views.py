@@ -77,7 +77,7 @@ def graph(request):
 		dff = pd.DataFrame(marr, columns = ['Product', 'detail', 'year'])
 		plt.xticks([1,2,3,4,5,6,7,8,9,10,11,12])
 		plt.figure(figsize=(6.6, 2.6))
-		month = seasonal_decompose(dff['detail'], model='multiplicable', period=5)
+		month = seasonal_decompose(dff['detail'], model='multiplicable', period=12)
 		plt.title('Seasonal Graph')
 		month.seasonal.plot()
 		plt.savefig("./LLCApp/LLCApp/static/month.png")
@@ -87,7 +87,7 @@ def graph(request):
 	elif len(data_for_pred)<24:
 		dff = pd.DataFrame(marr, columns = ['Product', 'detail', 'year'])
 		plt.figure(figsize=(6.6, 2.6))
-		month = seasonal_decompose(dff['detail'], model='multiplicable', period=5)
+		month = seasonal_decompose(dff['detail'], model='multiplicable', period=12)
 		plt.title('Seasonal Graph')
 		month.seasonal.plot()
 		plt.savefig("./LLCApp/LLCApp/static/month.png")
