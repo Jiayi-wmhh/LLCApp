@@ -13,6 +13,7 @@ from sshtunnel import SSHTunnelForwarder
 from sklearn.linear_model import LinearRegression, Lasso, Ridge
 from sklearn.preprocessing import PolynomialFeatures
 from statsmodels.tsa.seasonal import seasonal_decompose
+from pylab import xticks, yticks, np
 def homepage(request):
     return render(request, 'homepage.html')
 
