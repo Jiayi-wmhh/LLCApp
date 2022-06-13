@@ -78,7 +78,7 @@ def graph(request):
 		plt.figure(figsize=(6.6, 2.6))
 		month = seasonal_decompose(dff['detail'], model='multiplicable', period=5)
 		plt.title('Seasonal Graph')
-		plt.xticks([1,2,3,4,5,6,7,8,9,10,11,12])
+		plt.xticks(['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'])
 		month.seasonal.plot()
 		plt.savefig("./LLCApp/LLCApp/static/month.png")
 		plt.title('Trend Graph')
