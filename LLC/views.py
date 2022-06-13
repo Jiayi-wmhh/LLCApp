@@ -81,6 +81,8 @@ def graph(request):
 		plt.title('Seasonal Graph')
 		xticks_labels = [1,2,3,4,5,6,7,8,9,10,11,12]
 		xticks(np.linspace(0,29, 12), xticks_labels)
+		plt.xlabel('Month')
+		plt.ylabel('Coefficient')
 		month.seasonal.plot()
 		plt.savefig("./LLCApp/LLCApp/static/month.png")
 		plt.title('Trend Graph')
@@ -93,6 +95,8 @@ def graph(request):
 		plt.title('Seasonal Graph')
 		xticks_labels = [1,2,3,4,5,6,7,8,9,10,11,12]
 		xticks(np.linspace(0,29, 12), xticks_labels)
+		plt.xlabel('Month')
+		plt.ylabel('Coefficient')
 		month.seasonal.plot()
 		plt.savefig("./LLCApp/LLCApp/static/month.png")
 		plt.title('Trend Graph')
