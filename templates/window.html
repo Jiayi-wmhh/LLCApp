@@ -101,9 +101,11 @@
           <form action="graph" method="post">
                 {% csrf_token %}
                 <label for="imex" id="imex">Status:</label>
-                <select name="imexpo" class="imexpo">
-                      <option value="进口">Import</option>
+                <select name="imex" class="imex">
                       <option value="出口">Export</option>
+                      <option value="进口">Import</option>
+                      <option value="总额">Total</option>
+                      <option value="均衡">Balance</option>
                 </select></br>
                 <label for="Country">Country:</label>
                 <select name="country" class="country">
