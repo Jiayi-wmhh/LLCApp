@@ -63,9 +63,9 @@ def graph(request):
 	            elif imex == "出口":		
 	            	cur.execute('select import_country, sum(total_sales) as sale from trade.sales where export_country="%s" and product_name = "%s" and transaction_year >= "%s" and transaction_year <= "%s" group by import_country order by sale desc' %(country, product, startD, endD))
 	            elif imex == "贸易总额":		
-	            	cur.execute('select import_country, sum(total_sales) as sale from trade.total where import_country="%s" and product_name = "%s" and transaction_year >= "%s" and transaction_year <= "%s" group by import_country order by sale desc' %(country, product, startD, endD))
+	            	cur.execute('select import_country, sum(total_sales) as sale from trade.total where export_country="%s" and product_name = "%s" and transaction_year >= "%s" and transaction_year <= "%s" group by import_country order by sale desc' %(country, product, startD, endD))
 	            elif imex == "贸易均衡":		
-	            	cur.execute('select import_country, sum(total_sales) as sale from trade.balance where import_country="%s" and product_name = "%s" and transaction_year >= "%s" and transaction_year <= "%s" group by import_country order by sale desc' %(country, product, startD, endD))
+	            	cur.execute('select import_country, sum(total_sales) as sale from trade.balance where export_country="%s" and product_name = "%s" and transaction_year >= "%s" and transaction_year <= "%s" group by import_country order by sale desc' %(country, product, startD, endD))
 	            result = cur.fetchall()
 	            if len(result) == 0:
 	            	return render(request, 'LLC_error.html')
