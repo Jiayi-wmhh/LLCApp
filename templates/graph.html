@@ -166,6 +166,12 @@
 <div class="outer">
     <div class="container">
         {% for key, value in terminal %}
+            {% if key == "imex" %}
+                <p id="note" style="font-size: 20px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;">Status</p>
+                <p style="font-size: 20px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ value }}</p>
+            {% endif %}
             {% if key == "country" %}
                 <p id="note" style="font-size: 20px;
         font-family: Verdana, Geneva, Tahoma, sans-serif;">Country</p>
@@ -200,9 +206,11 @@
         <form action="graph" method="post">
             {% csrf_token %}
             <label for="imex" id="imex">Status:</label>
-                <select name="imexpo" class="imexpo">
-                      <option value="进口">Import</option>
+                <select name="imex" class="imex">
                       <option value="出口">Export</option>
+                      <option value="进口">Import</option>
+                      <option value="贸易总额">Total</option>
+                      <option value="贸易均衡">Balance</option>
                 </select></br>
                 <label for="Country">Country:</label>
                 <select name="country" class="country">

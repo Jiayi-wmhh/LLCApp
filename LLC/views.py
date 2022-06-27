@@ -27,7 +27,7 @@ def graph(request):
 	Datestart = request.POST.get('Datestart')
 	Dateend = request.POST.get('Dateend')
 	percent = request.POST.get('percent')
-	terminal = ({"country": country, "product": product, "Datestart": Datestart,
+	terminal = ({"imex": imex, "country": country, "product": product, "Datestart": Datestart,
 	"Dateend": Dateend, "percent": percent})
 	SSH_BASTION_ADDRESS = '18.221.180.201'  # ここに踏み台のEC2サーバーのIPアドレスを入れる
 	# SSH_PORT = 22
@@ -62,9 +62,9 @@ def graph(request):
 	            	cur.execute('select export_country, sum(total_sales) as sale from trade.sales where import_country="%s" and product_name = "%s" and transaction_year >= "%s" and transaction_year <= "%s" group by export_country order by sale desc' %(country, product, startD, endD))
 	            elif imex == "出口":		
 	            	cur.execute('select import_country, sum(total_sales) as sale from trade.sales where export_country="%s" and product_name = "%s" and transaction_year >= "%s" and transaction_year <= "%s" group by import_country order by sale desc' %(country, product, startD, endD))
-	            elif imex == "总额":		
+	            elif imex == "贸易总额":		
 	            	cur.execute('select import_country, sum(total_sales) as sale from trade.total where export_country="%s" and product_name = "%s" and transaction_year >= "%s" and transaction_year <= "%s" group by import_country order by sale desc' %(country, product, startD, endD))
-	            elif imex == "均衡":		
+	            elif imex == "贸易均衡":		
 	            	cur.execute('select import_country, sum(total_sales) as sale from trade.balance where export_country="%s" and product_name = "%s" and transaction_year >= "%s" and transaction_year <= "%s" group by import_country order by sale desc' %(country, product, startD, endD))
 	            result = cur.fetchall()
 	            if len(result) == 0:
