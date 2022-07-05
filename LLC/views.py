@@ -92,7 +92,7 @@ def graph(request):
 	if len(data_for_pred)>=24:
 		dff = pd.DataFrame(marr, columns = ['Product', 'detail', 'year'])
 		plt.figure(figsize=(6.6, 2.6))
-		month = seasonal_decompose(dff['detail'], model='multiplicable', period=5)
+		month = seasonal_decompose(dff['detail'], model='multiplicable', period=12)
 		plt.title('Seasonal Graph')
 		xticks_labels = [1,2,3,4,5,6,7,8,9,10,11,12]
 		xticks(np.linspace(0,29, 12), xticks_labels)
