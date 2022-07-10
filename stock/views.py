@@ -41,9 +41,9 @@ def result(request):
     tweet_num = 100
     start_date = '2020-01-01'
     epoch_num = 10
-    affect_rate = request.POST.get('SArate')
-    affect_rate = float(affect_rate)
-    print(affect_rate)
+    # affect_rate = request.POST.get('SArate')
+    # affect_rate = float(affect_rate)
+    # print(affect_rate)
     apikey = "&token=c8kjg9qad3ibbdm3takg"
     res = []
 
@@ -339,40 +339,41 @@ def result(request):
     predicted_stock_price = sc.inverse_transform(predicted_stock_price)
     print(str(ticker) + ":Prediction of Stock Price in future one day is: " + str(predicted_stock_price[0][0]))
     '''
-    temp_list = []
-    result = []
+    
+    # temp_list = []
+    # result = []
 
-    inputs = dataset_total[dataset_total.shape[0] - 60:].values
-    inputs = inputs.reshape(-1,1)
-    inputs = sc.transform(inputs)
-
-
-    input_pred = []
-    input_pred.append(inputs[:60, 0])
-    input_pred = np.array(input_pred)
-    function = 1 + (weight_sum * affect_rate)
-    input_pred[0][59] = input_pred[0][59] * function
-    input_pred = np.reshape(input_pred, (input_pred.shape[0], input_pred.shape[1], 1))
-    predicted_stock_price = model.predict(input_pred)
-    temp_list.append(predicted_stock_price[0][0])
-    predicted_stock_price = sc.inverse_transform(predicted_stock_price)
-
-    result.append(predicted_stock_price[0][0])
+    # inputs = dataset_total[dataset_total.shape[0] - 60:].values
+    # inputs = inputs.reshape(-1,1)
+    # inputs = sc.transform(inputs)
 
 
-    for i in range(1,7):
-        input_pred = []
-        input_pred.append(inputs[i:60, 0])
-        input_pred[0] = np.append(input_pred,temp_list)
-        input_pred = np.array(input_pred)
-        input_pred = np.reshape(input_pred, (input_pred.shape[0], input_pred.shape[1], 1))
+    # input_pred = []
+    # input_pred.append(inputs[:60, 0])
+    # input_pred = np.array(input_pred)
+    # function = 1 + (weight_sum * affect_rate)
+    # input_pred[0][59] = input_pred[0][59] * function
+    # input_pred = np.reshape(input_pred, (input_pred.shape[0], input_pred.shape[1], 1))
+    # predicted_stock_price = model.predict(input_pred)
+    # temp_list.append(predicted_stock_price[0][0])
+    # predicted_stock_price = sc.inverse_transform(predicted_stock_price)
 
-        predicted_stock_price = model.predict(input_pred)
-        temp_list.append(predicted_stock_price[0][0])
-        predicted_stock_price = sc.inverse_transform(predicted_stock_price)
-        result.append(predicted_stock_price[0][0])
+    # result.append(predicted_stock_price[0][0])
 
-    print(result)
-    res.append(result)
+
+    # for i in range(1,7):
+    #     input_pred = []
+    #     input_pred.append(inputs[i:60, 0])
+    #     input_pred[0] = np.append(input_pred,temp_list)
+    #     input_pred = np.array(input_pred)
+    #     input_pred = np.reshape(input_pred, (input_pred.shape[0], input_pred.shape[1], 1))
+
+    #     predicted_stock_price = model.predict(input_pred)
+    #     temp_list.append(predicted_stock_price[0][0])
+    #     predicted_stock_price = sc.inverse_transform(predicted_stock_price)
+    #     result.append(predicted_stock_price[0][0])
+
+    # print(result)
+    # res.append(result)
 
     return render(request,"stock/result.html",{ "Result":res }) 
