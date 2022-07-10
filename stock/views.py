@@ -30,6 +30,9 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import train_test_split
 from keras.callbacks import EarlyStopping
 import datetime
+from ast import keyword                      
+from pytrends.request import TrendReq
+from wordcloud import WordCloud
 # Create your views here.
 
 def search(request):
