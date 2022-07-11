@@ -94,6 +94,14 @@
                 </tr>
             </table>
         </div>
+        <div class = "nftBox">
+            <table id = "top_table" style="margin-left: 50px;">
+                <tr>
+                    <th style="font-size: 25px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: gray;">Keyword Top Search </th>
+                </tr>
+            </table>
+            <img src="{% static 'top_search.png' %}" width="400px" height="400px">   
+        </div>
     </body> 
 </html>
 
@@ -111,6 +119,7 @@
     drawTwitter()
     drawFinviz()
     drawPrediction()
+    top_search()
 
     function requestCompany(company_info){
         var companyTable = document.getElementById("companyDetail");
@@ -428,7 +437,23 @@
         });
     }
 
-    
+    function top_search(){
+        var top_list = ('{{ Result.6 | escapejs }}').split("', '");
+        let data_length = top_list.length
+        top_list[0] = top_list[0].slice(2)
+        console.log(top_list)
+        let result_table = document.getElementById("top_table");
+        if(data_length > 10){
+            data_length = 10
+        }else{
+            data_length = data_length -1
+        }
+        let a = 0;
+        while(a<data_length){
+            result_table.innerHTML += '<tr><th>'  +top_list[a]+'</th><tr>';
+            a++;
+        }
+    }
 </script>
 
 <style>
@@ -588,6 +613,14 @@
         margin-top: 850px;
         margin-left: 900px;
         width:700px;
+        height:350px;
+    }
+
+    .nftBox{
+        position: absolute;
+        margin-top: 300px;
+        margin-left: 1400px;
+        width:500px;
         height:350px;
     }
 
