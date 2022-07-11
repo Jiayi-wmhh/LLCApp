@@ -378,8 +378,6 @@ def result(request):
 
     # print(result)
     # res.append(result)
-
-    res = []
     # twitter
     num_twitter = 100
     # change bearer token when the company account is created
