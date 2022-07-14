@@ -140,7 +140,7 @@
 
     function requestCompany(company_info){
         var companyTable = document.getElementById("companyDetail");
-        companyTable.innerHTML = '<div id = "company_img" class = "img_style"><img src = '+company_info["logo"]+ ' width = "100px" height = "100px"></div>';
+        companyTable.innerHTML = '<div id = "company_img" class = "img_style"><img src = '+company_info["logo"]+ ' width = "50px" height = "50px"></div>';
         companyTable.innerHTML += '<div id = "company_table"><table style= "width:80%;margin-top:50px; margin-left:10%">'
                                 + '<tr><th> Company Name</th><td>'+company_info["name"] + '</td>'
                                 + '<tr><th> Stock Ticker Symbol</th><td>'+company_info["ticker"] + '</td>'
@@ -522,9 +522,9 @@
 
     .img_style{
         margin-top: 0px;
-        margin-left: 50px;
-        width: 10px;
-        height: 10px;
+        margin-left: 0px;
+        width: 50px;
+        height: 50px;
     }
 
     table, th, td {
