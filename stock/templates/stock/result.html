@@ -492,10 +492,7 @@
     }
 
     function related_topic_search(){
-        var rising_list = ('{{ Result.10 | escapejs }}').split("', '");
-        console.log("len")
-        console.log(len(rising_list))
-        console.log(str(rising_list))
+        var rising_list = ('{{ Result.9 | escapejs }}').split("', '");
         let data_length = rising_list.length
         rising_list[0] = rising_list[0].slice(2)
         console.log(rising_list)
