@@ -456,10 +456,10 @@
 
     function top_search(){
         var top_list = ('{{ Result.8 | escapejs }}').split("', '");
-        console.log(top_list)
+        // console.log(top_list)
         let data_length = top_list.length
         top_list[0] = top_list[0].slice(2)
-        console.log(top_list)
+        // console.log(top_list)
         let result_table = document.getElementById("top_table");
         if(data_length > 10){
             data_length = 10
@@ -477,7 +477,7 @@
         var rising_list = ('{{ Result.9 | escapejs }}').split("', '");
         let data_length = rising_list.length
         rising_list[0] = rising_list[0].slice(2)
-        console.log(rising_list)
+        // console.log(rising_list)
         let result_table = document.getElementById("rising_table");
         if(data_length > 10){
             data_length = 10
@@ -674,22 +674,22 @@
         position: absolute;
         margin-top: 300px;
         margin-left: 1400px;
-        width:650px;
+        width:500px;
         height:600px;
     }
 
     .rising_search_box{
         position: absolute;
         margin-top: 300px;
-        margin-left: 2050px;
-        width:650px;
+        margin-left: 1900px;
+        width:500px;
         height:600px;
     }
 
     .related_topic_box{
         position: absolute;
         margin-top: 300px;
-        margin-left: 2700px;
+        margin-left: 2400px;
         width:650px;
         height:600px;
     }
