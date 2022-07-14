@@ -97,7 +97,7 @@
         <div class = "nftBox">
             <table id = "top_table" style="margin-left: 50px;">
                 <tr>
-                    <th style="font-size: 25px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: gray;">Keyword Top Search </th>
+                    <th style="font-size: 15px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: gray;">Keyword Top Search </th>
                 </tr>
             </table>
             <img src="{% static 'top_search.png' %}" width="400px" height="400px">   
@@ -105,7 +105,7 @@
         <div class = "rising_search_box">
             <table id = "rising_table" style="margin-left: 50px;">
                 <tr>
-                    <th style="font-size: 25px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: gray;">Keyword Rising Search </th>
+                    <th style="font-size: 15px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: gray;">Keyword Rising Search </th>
                 </tr>   
             </table>
             <img src="{% static 'rising_search.png' %}" width="400px" height="400px">   
@@ -113,7 +113,7 @@
         <div class = "related_topic_box">
             <table id = "related_topic_table" style="margin-left: 50px;">
                 <tr>
-                    <th style="font-size: 25px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: gray;">Related Topic Search </th>
+                    <th style="font-size: 15px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: gray;">Related Topic Search </th>
                 </tr>   
             </table>
             <img src="{% static 'related_topic_search.png' %}" width="400px" height="400px">   
@@ -285,8 +285,8 @@
                 news_table.innerHTML += '<div class = "smnewsbox" style ="margin-top:10px;">'
                                     + '<img src="'+news_info[i]["image"]+'" width = "100px" height = "100px" style = "margin-top:10px; margin-left:10px;">'
                                     + '<div style = "margin-left:120px; margin-top:-110px;height:120px;width:70%; position: absolute;font-family: Verdana, Geneva, Tahoma, sans-serif;">'
-                                    + '<h1  style = "font-size:12px;text-aglin:vertical-align;" >'+news_info[i]["headline"]+'</h1>'
-                                    + '<p  style = "font-weight:normal;font-size:14px;text-aglin:vertical-align;" >'+ToLocalDate(news_info[i]["datetime"])+'</p>'
+                                    + '<h1  style = "font-size:10px;text-aglin:vertical-align;" >'+news_info[i]["headline"]+'</h1>'
+                                    + '<p  style = "font-weight:normal;font-size:10px;text-aglin:vertical-align;" >'+ToLocalDate(news_info[i]["datetime"])+'</p>'
                                     + '<a href='+news_info[i]["url"]+' style = "color:blue">See Original Post</a>'
                                     +'</div></div>';        
                         
@@ -522,9 +522,9 @@
 
     .img_style{
         margin-top: 0px;
-        margin-left: 100px;
-        width: 20px;
-        height: 20px;
+        margin-left: 50px;
+        width: 10px;
+        height: 10px;
     }
 
     table, th, td {
@@ -618,7 +618,7 @@
     .linkTo{
         text-align: center;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 20px;
+        font-size: 15px;
         text-decoration: none;
         /*background-color: #777;*/ /* Green */
         margin-top: 8px;
@@ -648,7 +648,7 @@
         margin-left: 200px;
         text-align: center;
         font-family:Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 20px;
+        font-size: 15px;
         font-weight: bolder;
     }
 
