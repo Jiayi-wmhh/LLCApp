@@ -140,7 +140,7 @@
 
     function requestCompany(company_info){
         var companyTable = document.getElementById("companyDetail");
-        companyTable.innerHTML = '<div id = "company_img" class = "img_style"><img src = '+company_info["logo"]+ ' width = "100px" height = "100px"></div>';
+        companyTable.innerHTML = '<div id = "company_img" class = "img_style"><img src = '+company_info["logo"]+ ' width = "60px" height = "60px"></div>';
         companyTable.innerHTML += '<div id = "company_table"><table style= "width:80%;margin-top:50px; margin-left:10%">'
                                 + '<tr><th> Company Name</th><td>'+company_info["name"] + '</td>'
                                 + '<tr><th> Stock Ticker Symbol</th><td>'+company_info["ticker"] + '</td>'
@@ -602,10 +602,10 @@
 
     .newsBox{
         position: absolute;
-        margin-top: 0%;
-        margin-left: 43%;
-        width:15%;
-        height:12%;
+        margin-top: 56%;
+        margin-left: 56%;
+        width:25%;
+        height:10%;
 
     }
     .predBox{
