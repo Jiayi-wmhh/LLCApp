@@ -102,6 +102,22 @@
             </table>
             <img src="{% static 'top_search.png' %}" width="400px" height="400px">   
         </div>
+        <div class = "rising_search_box">
+            <table id = "rising_table" style="margin-left: 50px;">
+                <tr>
+                    <th style="font-size: 25px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: gray;">Keyword Rising Search </th>
+                </tr>   
+            </table>
+            <img src="{% static 'rising_search.png' %}" width="400px" height="400px">   
+        </div>
+        <div class = "related_topic_box">
+            <table id = "related_topic_table" style="margin-left: 50px;">
+                <tr>
+                    <th style="font-size: 25px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: gray;">Related Topic Search </th>
+                </tr>   
+            </table>
+            <img src="{% static 'related_topic_search.png' %}" width="400px" height="400px">   
+        </div>
     </body> 
 </html>
 
@@ -119,6 +135,8 @@
     drawTwitter()
     drawFinviz()
     top_search()
+    rising_search()
+    related_topic_search()
 
     function requestCompany(company_info){
         var companyTable = document.getElementById("companyDetail");
@@ -454,6 +472,42 @@
             a++;
         }
     }
+
+    function rising_search(){
+        var rising_list = ('{{ Result.9 | escapejs }}').split("', '");
+        let data_length = rising_list.length
+        rising_list[0] = rising_list[0].slice(2)
+        console.log(rising_list)
+        let result_table = document.getElementById("rising_table");
+        if(data_length > 10){
+            data_length = 10
+        }else{
+            data_length = data_length -1
+        }
+        let a = 0;
+        while(a<data_length){
+            result_table.innerHTML += '<tr><th>'  +rising_list[a]+'</th><tr>';
+            a++;
+        }
+    }
+
+    function related_topic_search(){
+        var rising_list = ('{{ Result.10 | escapejs }}').split("', '");
+        let data_length = rising_list.length
+        rising_list[0] = rising_list[0].slice(2)
+        console.log(rising_list)
+        let result_table = document.getElementById("related_topic_table");
+        if(data_length > 10){
+            data_length = 10
+        }else{
+            data_length = data_length -1
+        }
+        let a = 0;
+        while(a<data_length){
+            result_table.innerHTML += '<tr><th>'  +rising_list[a]+'</th><tr>';
+            a++;
+        }
+    }
 </script>
 
 <style>
@@ -620,8 +674,24 @@
         position: absolute;
         margin-top: 300px;
         margin-left: 1400px;
-        width:1000px;
-        height:1000px;
+        width:650px;
+        height:600px;
+    }
+
+    .rising_search_box{
+        position: absolute;
+        margin-top: 300px;
+        margin-left: 2050px;
+        width:650px;
+        height:600px;
+    }
+
+    .related_topic_box{
+        position: absolute;
+        margin-top: 300px;
+        margin-left: 2700px;
+        width:650px;
+        height:600px;
     }
 
     .pieChart{
