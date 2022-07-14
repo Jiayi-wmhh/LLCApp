@@ -380,19 +380,19 @@ def result(request):
     # res.append(result)
     # twitter
     
-    num_twitter = 100
-    # change bearer token when the company account is created
-    bearer_token = "AAAAAAAAAAAAAAAAAAAAAM48aAEAAAAAi%2FLi%2ByJN40pC0y39uAGACG8joMw%3DWSvLjUQofW6rPSZoNaC9QWdJQfXy8EtTWdaUSIFePc4VWyT4mP"
-    url = "https://api.twitter.com/2/tweets/search/recent?query="+ticker+"&max_results="+str(num_twitter)
-    # add headers information to get request
-    headers = CaseInsensitiveDict()
-    headers["Accept"] = "application/json"
-    headers["Authorization"] = "Bearer " + bearer_token
+    # num_twitter = 100
+    # # change bearer token when the company account is created
+    # bearer_token = "AAAAAAAAAAAAAAAAAAAAAM48aAEAAAAAi%2FLi%2ByJN40pC0y39uAGACG8joMw%3DWSvLjUQofW6rPSZoNaC9QWdJQfXy8EtTWdaUSIFePc4VWyT4mP"
+    # url = "https://api.twitter.com/2/tweets/search/recent?query="+ticker+"&max_results="+str(num_twitter)
+    # # add headers information to get request
+    # headers = CaseInsensitiveDict()
+    # headers["Accept"] = "application/json"
+    # headers["Authorization"] = "Bearer " + bearer_token
 
 
-    resp = requests.get(url, headers=headers).json()
-    data = resp["data"]
-    tweets = []
+    # resp = requests.get(url, headers=headers).json()
+    # data = resp["data"]
+    # tweets = []
 
     for i in range(len(data)):
         parsed_tweet =[]

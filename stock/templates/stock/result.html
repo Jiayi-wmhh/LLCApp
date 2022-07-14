@@ -152,7 +152,7 @@
     }
 
     function requestSummary(summary_info){
-        console.log(summary_info)
+        // console.log(summary_info)
         var summaryTable = document.getElementById("summary");
         summaryTable.innerHTML += '<div id = "summary_table"><table style= "width:80%;margin-top:70px;margin-left:10%;">'
                                 + '<tr><th> Trading Day</th><td id = "today">'+ToLocalDate(summary_info["t"]) + '</td>'
@@ -352,7 +352,7 @@
         "#D2042D",
         "#880808"
         ];
-        console.log(yValues)
+        // console.log(yValues)
         new Chart("myChart", {
         type: "pie",
         data: {
@@ -493,6 +493,8 @@
 
     function related_topic_search(){
         var rising_list = ('{{ Result.10 | escapejs }}').split("', '");
+        console.log("Jiayi")
+        console.log(rising_list)
         let data_length = rising_list.length
         rising_list[0] = rising_list[0].slice(2)
         console.log(rising_list)
