@@ -1,0 +1,181 @@
+{% load static %} 
+<!DOCTYPE html>
+<html>
+    <head>
+    	<style>
+    		.outer{
+    			margin-top:0px;
+    			margin-left: 0px;
+    			width:1300px;
+        		height:700px; 
+    		}
+    		.title{
+    			margin-top:0px;
+    			margin-left: 0px;
+    			width:300px;
+        		height:20px; 
+        		position: absolute;
+    		}
+    		.price{
+/*    			display: inline-block;*/
+    			margin-top:25px;
+    			margin-left: 0px;
+    			width:200px;
+        		height:50px; 
+        		font-size: 18px;
+        		position: absolute;
+    		}
+    		.comment{
+    			margin-top:47px;
+    			margin-left: 0px;
+    			width:200px;
+        		height:50px; 
+        		font-size: 12px;
+        		position: absolute;
+    		}
+    		.draw{
+    			margin-top:0px;
+    			margin-left: 220px;
+    			width:750px;
+        		height:200px; 
+        		position: absolute;
+    		}
+    		.draw_business{
+    			margin-top:600px;
+    			margin-left: 220px;
+    			width:750px;
+        		height:200px; 
+        		position: absolute;
+    		}
+    		table {
+			  font-family: arial, sans-serif;
+			  border-collapse: collapse;
+			  width: 100%;
+			}
+
+			td, th {
+			  border: 1px solid #dddddd;
+			  text-align: left;
+			  padding: 8px;
+			}
+
+			tr:nth-child(even) {
+			  background-color: #dddddd;
+			}
+    		.newsPie{
+    			margin-top:70px;
+    			margin-left: 0px;
+    			width:200px;
+        		height:50px; 
+        		position: absolute;
+    		}
+    		.newsPieBus{
+				margin-top:500px;
+    			margin-left: 0px;
+    			width:200px;
+        		height:50px; 
+        		position: absolute;
+    		}
+    		.lineGraph{
+    			margin-top:80px;
+    			margin-left: 980px;
+    			width:600px;
+        		height:400px; 
+        		position: absolute;
+    		}
+    	</style>
+    </head>
+    <body>
+    	<div class="outer">
+    		<div class = "title">
+    			{% for key, value in terminal %}
+		        	{% if key == "stockName" %}
+		                <h3>{{value}}</h3>
+		            {% endif %}
+		        {% endfor %}
+    		</div>
+    		<div class = "price" style="display: flex; justify-content: space-between;">
+    			{% for key, value in terminal %}
+		        	{% if key == "price" %}
+		                <p>{{value}}</p>
+		            {% endif %}
+		            {% if key == "change" %}
+		                <p>{{value}}</p>
+		            {% endif %}
+		        {% endfor %}
+    		</div>
+    		<div class="comment" style="display: flex; justify-content: space-between;">
+    			<p>At close</p>
+    			<p>After hours</p>
+    		</div>
+    		<div class="draw">
+	    		<table>
+	    			<tr>
+	    				<th>Negative</th>
+	    				<th>Neutral</th>
+	    				<th>Positive</th>
+	    				<th>Compound</th>
+	    				<th>Statement</th>
+	    			</tr>
+	    			{% for key, value in terminal %}
+	    				{% if key == "nnp" %}
+	    					{% for v in value %}
+				    			<tr>
+				    				<td>{{v.0}}</td>
+				    				<td>{{v.1}}</td>
+				    				<td>{{v.2}}</td>
+				    				<td>{{v.3}}</td>
+				    				<td><a href={{v.5}} style="color: green; text-decoration:none;">{{v.4}}</a></td>
+				    			</tr>
+			    			{% endfor %}
+			    		{% endif %}
+		    		{% endfor %}
+	    		</table>
+	    	</div>
+	    	<div class=newsPie>
+				{% include './newsPie.html' %}
+	    	</div>
+	    	<div class="draw_business">
+	    		<table>
+	    			<tr>
+	    				<th>Negative</th>
+	    				<th>Neutral</th>
+	    				<th>Positive</th>
+	    				<th>Compound</th>
+	    				<th>Finance News</th>
+	    			</tr>
+	    			{% for key, value in terminal %}
+	    				{% if key == "nnp_bus" %}
+	    					{% for v in value %}
+				    			<tr>
+				    				<td>{{v.0}}</td>
+				    				<td>{{v.1}}</td>
+				    				<td>{{v.2}}</td>
+				    				<td>{{v.3}}</td>
+				    				<td>{{v.4}}</td>
+				    			</tr>
+			    			{% endfor %}
+			    		{% endif %}
+		    		{% endfor %}
+	    		</table>
+	    	</div>
+	    	<div class=newsPieBus>
+				{% include './newsPieBus.html' %}
+	    	</div>
+	    	<div class=lineGraph>
+	    		<img src="{% static 'line_graph.png' %}"><br>
+	    	</div>
+	    	<!-- <div class=newsPieSmall>
+	    		{% for key, value in terminal %}
+		        	{% if key == "smallPie" %}
+		        		{% for v in value %}
+		        		<div class=nSmall>
+			        		{% include v %}
+			        	</div>
+			        	{% endfor %}
+		            {% endif %}
+		        {% endfor %}
+	    	</div> -->
+	    </div>
+    </body>
+</html>

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'LLC.apps.LlcConfig',
     'effect.apps.EffectConfig',
     'stock.apps.StockConfig',
+    'news.apps.NewsConfig',
 ]
 
 MIDDLEWARE = [
