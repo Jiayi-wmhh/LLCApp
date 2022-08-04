@@ -117,6 +117,23 @@ def result(request):
 	# fig.update_layout(showlegend=False)
 	plot(fig, validate=False, filename='./LLCApp/templates/ttPie.html', 
 		auto_open=False)
+	cur_bar = [0, 0, 0]
+	cur_bar[0] = round(pieValue[0]/(pieValue[0]+pieValue[1]+pieValue[2]), 3)
+	cur_bar[1] = round(pieValue[1]/(pieValue[0]+pieValue[1]+pieValue[2]), 3)
+	cur_bar[2] = round(pieValue[2]/(pieValue[0]+pieValue[1]+pieValue[2]), 3)
+	sum_bar = [0, 0, 0]
+	sum_bar[0] = round(tt_value[0]/(tt_value[0]+tt_value[1]+tt_value[2]), 3)
+	sum_bar[1] = round(tt_value[1]/(tt_value[0]+tt_value[1]+tt_value[2]), 3)
+	sum_bar[2] = round(tt_value[2]/(tt_value[0]+tt_value[1]+tt_value[2]), 3)
+	X_axis = np.arange(len(pieName))
+	plt.bar(X_axis - 0.2, cur_bar, 0.4, label = ticker)
+	plt.bar(X_axis + 0.2, sum_bar, 0.4, label = 'Summary')
+	plt.xticks(X_axis, pieName)
+	plt.xlabel("Classification")
+	plt.ylabel("Value")
+	plt.title("News Analysis")
+	plt.legend()
+	plt.savefig("/LLCApp/LLCApp/static/tt_bar.png")
 
 
 	return render(request,"result.html", {'terminal':terminal.items()}) 
