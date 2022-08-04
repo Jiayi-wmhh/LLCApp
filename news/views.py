@@ -133,7 +133,7 @@ def result(request):
 	plt.ylabel("Value")
 	plt.title("News Analysis")
 	plt.legend()
-	plt.savefig("/LLCApp/LLCApp/static/tt_bar.png")
+	plt.savefig("./LLCApp/LLCApp/static/tt_bar.png")
 
 
 	return render(request,"result.html", {'terminal':terminal.items()}) 
