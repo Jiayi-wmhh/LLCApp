@@ -18,6 +18,7 @@ import plotly.express as px
 from plotly.offline import plot
 from datetime import date
 from datetime import timedelta
+import numpy as np 
 
 def search(request):
     return render(request,"search.html")
