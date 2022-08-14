@@ -18,6 +18,7 @@ import plotly.express as px
 from plotly.offline import plot
 from datetime import date
 from datetime import timedelta
+from datetime import datetime
 import numpy as np 
 
 def search(request):
@@ -25,6 +26,7 @@ def search(request):
 
 def result(request):
 	ticker = request.POST.get('ticker')
+	timeRange = request.POST.get('timeRange')
 	url_news = "https://finance.yahoo.com/quote/{}?p={}"
 	response = requests.get(url_news.format(ticker, ticker))
 	soup = BeautifulSoup(response.text)
@@ -86,6 +88,7 @@ def result(request):
 	'SEDG', 'TRMB', 'TER', 'NTAP', 'PAYC', 'TYL', 'STX', 'AKAM', 'WDC', 'NLOK',
 	'JKHY', 'CTXS', 'PTC', 'QRVO', 'FFIV', 'JNPR', 'DXC', 'CDAY']
 	terminal["tt_res"] = []
+	today = date.today()
 	for i in terminal["ticker_list"]:
 		url_tt = "https://finviz.com/quote.ashx?t="+i
 		req = Request(url=url_tt,headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0'}) 
@@ -93,7 +96,44 @@ def result(request):
 		soup = BeautifulSoup(response)
 		news_tt = soup.find(id='news-table')
 		tt_curr = [0.0, 0.0, 0.0, 0.0, i]
+		exit_flag = False
 		for x in news_tt.findAll('tr'):
+			tc = 0
+			if len(timeRange) != 0:
+				for y in x.find_all('td'):
+					if tc == 0 and y.text[0].isalpha():
+						yearD = '20'+y.text[7:9]
+						if y.text[0:3] == 'Aug':
+							monthD = "08"
+						elif y.text[0:3] == 'Jul':
+							monthD = "07"
+						elif y.text[0:3] == 'Jun':
+							monthD = "06"
+						elif y.text[0:3] == 'May':
+							monthD = "05"
+						elif y.text[0:3] == 'Apr':
+							monthD = "04"
+						elif y.text[0:3] == 'Mar':
+							monthD = "03"
+						elif y.text[0:3] == 'Feb':
+							monthD = "02"
+						elif y.text[0:3] == 'Jan':
+							monthD = "01"
+						elif y.text[0:3] == 'Sep':
+							monthD = "09"
+						elif y.text[0:3] == 'Oct':
+							monthD = "03"
+						elif y.text[0:3] == 'Nov':
+							monthD = "11"
+						elif y.text[0:3] == 'Dec':
+							monthD = "12"
+						dataD = y.text[4:6]
+						curr = date(int(yearD), int(monthD), int(dataD))
+						diff = (today - curr).days
+						if diff > int(timeRange):
+							exit_flag = True
+							break
+					tc+=1
 			Statement = x.a.get_text()
 			sid_obj = SentimentIntensityAnalyzer()
 			sentiment_dict = sid_obj.polarity_scores(Statement)
@@ -101,6 +141,8 @@ def result(request):
 			tt_curr[1] += sentiment_dict["neu"]
 			tt_curr[2] += sentiment_dict["pos"]
 			tt_curr[3] += sentiment_dict["compound"]
+			if exit_flag:
+				break
 		tt_curr[0] = round(tt_curr[0], 3)
 		tt_curr[1] = round(tt_curr[1], 3)
 		tt_curr[2] = round(tt_curr[2], 3)
