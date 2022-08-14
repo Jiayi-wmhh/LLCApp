@@ -10,8 +10,8 @@
         		height:700px; 
     		}
     		.title{
-    			margin-top:0px;
-    			margin-left: 0px;
+    			margin-top:180px;
+    			margin-left: 20px;
     			width:150px;
         		height:30px; 
         		font-size: 26px;
@@ -20,8 +20,8 @@
     		}
     		.price{
 /*    			display: inline-block;*/
-    			margin-top:40px;
-    			margin-left: 0px;
+    			margin-top:230px;
+    			margin-left: 70px;
     			width:150px;
         		height:25px; 
         		font-size: 18px;
@@ -29,8 +29,9 @@
         		position: absolute;
     		}
     		.comment{
-    			margin-top:65px;
-    			margin-left: 0px;
+    			margin-top:255px;
+    			margin-left: 70px;
+				margin-bottom: 20px;
     			width:150px;
         		height:20px; 
         		font-size: 12px;
@@ -38,8 +39,8 @@
         		position: absolute;
     		}
     		.draw{
-    			margin-top:0px;
-    			margin-left: 170px;
+    			margin-top:450px;
+    			margin-left: 200px;
     			width:700px;
         		height:200px; 
         		position: absolute;
@@ -49,16 +50,23 @@
 			  border-collapse: collapse;
 			  width: 100%;
 			}
+			.tt_bar{
+    			margin-top:0px;
+    			margin-left: 430px;
+    			width:200px;
+        		height:200px; 
+        		position: absolute;
+    		}
 			.ttPie{
 				margin-top:0px;
-    			margin-left: 880px;
+    			margin-left: 1140px;
     			width:165px;
         		height:165px; 
         		position: absolute;
 			}
 			.draw_tt{
-				margin-top:480px;
-    			margin-left: 880px;
+				margin-top:450px;
+    			margin-left: 950px;
     			width:300px;
         		height:200px; 
         		position: absolute;
@@ -73,43 +81,68 @@
 			  background-color: #dddddd;
 			}
     		.newsPie{
-    			margin-top:90px;
-    			margin-left: 0px;
-    			width:165px;
-        		height:50px; 
-        		position: absolute;
-    		}
-    		.tt_bar{
     			margin-top:0px;
-    			margin-left: 1045px;
-    			width:200px;
-        		height:200px; 
+    			margin-left: 240px;
+    			width:165px;
+        		height:165px; 
         		position: absolute;
     		}
+    		.leftC{
+    			margin-top: 0px;
+		        color: white;
+		        text-align: center; 
+		        width:200px;
+		        height:1130px;   
+		        background-color: #34B33D;
+		        text-align:center;
+		        position: absolute;
+		        margin-left: 0%;
+    		}
+    		.linkTo{
+		        text-align: center;
+		        font-family: Verdana, Geneva, Tahoma, sans-serif;
+		        font-size: 20px;
+		        text-decoration: none;
+		        /*background-color: #777;*/ /* Green */
+		        margin-top: 8px;
+		        margin-bottom: 8px;
+		        color: white;
+		    }
     	</style>
     </head>
     <body>
     	<div class="outer">
-    		<div class = "title">
-    			{% for key, value in terminal %}
-		        	{% if key == "stockName" %}
-		                <h3>{{value}}</h3>
-		            {% endif %}
-		        {% endfor %}
-    		</div>
-    		<div class = "price" style="display: flex; justify-content: space-between;">
-    			{% for key, value in terminal %}
-		        	{% if key == "price" %}
-		                <p>{{value}}</p>
-		            {% endif %}
-<!-- 		            {% if key == "change" %}
-		                <p>{{value}}</p>
-		            {% endif %} -->
-		        {% endfor %}
-    		</div>
-    		<div class="comment" style="display: flex; justify-content: space-between;">
-    			<p>At close</p>
-    			<p>After hours</p>
+    		<div class = "leftC">
+    			<div class = "title">
+	    			{% for key, value in terminal %}
+			        	{% if key == "stockName" %}
+			                <h3>{{value}}</h3>
+			            {% endif %}
+			        {% endfor %}
+	    		</div>
+	    		<div class = "price" style="display: flex; justify-content: space-between;">
+	    			{% for key, value in terminal %}
+			        	{% if key == "price" %}
+			                <p>{{value}}</p>
+			            {% endif %}
+	<!-- 		            {% if key == "change" %}
+			                <p>{{value}}</p>
+			            {% endif %} -->
+			        {% endfor %}
+	    		</div>
+	    		<div class="comment" style="display: flex; justify-content: space-between;">
+	    			<p>At close</p>
+<!-- 	    			<p>After hours</p> -->
+	    		</div>
+    			<div class = "linkTo">
+		            <a href="http://www.theheman22.com/effect/prime" style="color: white; text-decoration:none;">Correlation Analysis</a>
+		        </div>
+		        <div class = "linkTo">
+		            <a href="http://www.theheman22.com/stock/search" style="color: white; text-decoration:none;">Stock Analysis</a>
+		        </div>
+		        <div class = "linkTo">
+		            <a href="http://www.theheman22.com/LLCApp/window" style="color: white; text-decoration:none;">Trade Analysis</a>
+		        </div>
     		</div>
     		<div class="draw">
 	    		<table>
