@@ -14,10 +14,12 @@
                     {% csrf_token %}
                     <input id = "textBox" type = "text" name = "ticker" placeholder="Enter Ticker Symbol" autocomplete="on" required>
                     <br>
-                    <input id = "textBox" type = "number" name = "timeRange" placeholder="Enter Days (min 24)" min="24" autocomplete="on">
-                    <br>
-                    <p style="font-size: 12px;">The second box requires a number which is at minimum 18. You will get all the news happened in these days you entered. </p>
-                    <p style="font-size: 12px;">** To get all the news in yahoo, just do not enter the days box and leave it empty.</p>
+                    <label for="start">Start:</label>
+                    <input type="date" id="textBox" name="Datestart"
+                           value="2022-08-14"></br>
+                    <label for="start">End:</label></br>
+                    <input type="date" id="textBox" name="Dateend"
+                           value="2022-08-14"></br>
                     <input id = "submit" type = "submit" name = "button" value ="Submit">
                 </form>
 

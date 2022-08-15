@@ -20,13 +20,23 @@ from datetime import date
 from datetime import timedelta
 from datetime import datetime
 import numpy as np 
+import time
 
 def search(request):
     return render(request,"search.html")
 
 def result(request):
 	ticker = request.POST.get('ticker')
-	timeRange = request.POST.get('timeRange')
+	startT = request.POST.get('Datestart')
+	endT = request.POST.get('Dateend')
+	startYear = int(startT[0:4])
+	startMonth = int(startT[5:7])
+	startDate = int(startT[8:10])
+	dateStart = date(int(startYear), int(startMonth), int(startDate))
+	endYear = int(endT[0:4])
+	endMonth = int(endT[5:7])
+	endDate = int(endT[8:10])
+	dateEnd = date(int(endYear), int(endMonth), int(endDate))
 	url_news = "https://finance.yahoo.com/quote/{}?p={}"
 	response = requests.get(url_news.format(ticker, ticker))
 	soup = BeautifulSoup(response.text)
@@ -50,11 +60,50 @@ def result(request):
 	news_table = html.find(id='news-table')
 	pieName = ["Negative", "Neutral", "Positive"]
 	pieValue = [0, 0, 0]
+	exit_small_flag = False
+	curr = date.today()
 	for x in news_table.findAll('tr'):
-		Statement = x.a.get_text()
-		terminal["statement"].append(Statement)
-		hyper = x.a.attrs["href"]
-		terminal["hyper_spec"].append(hyper)
+		tc = 0
+		for y in x.find_all('td'):
+			if tc == 0 and y.text[0].isalpha():
+				yearD = '20'+y.text[7:9]
+				if y.text[0:3] == 'Aug':
+					monthD = "08"
+				elif y.text[0:3] == 'Jul':
+					monthD = "07"
+				elif y.text[0:3] == 'Jun':
+					monthD = "06"
+				elif y.text[0:3] == 'May':
+					monthD = "05"
+				elif y.text[0:3] == 'Apr':
+					monthD = u"04"
+				elif y.text[0:3] == 'Mar':
+					monthD = "03"
+				elif y.text[0:3] == 'Feb':
+					monthD = "02"
+				elif y.text[0:3] == 'Jan':
+					monthD = "01"
+				elif y.text[0:3] == 'Sep':
+					monthD = "09"
+				elif y.text[0:3] == 'Oct':
+					monthD = "03"
+				elif y.text[0:3] == 'Nov':
+					monthD = "11"
+				elif y.text[0:3] == 'Dec':
+					monthD = "12"
+				dataD = y.text[4:6]
+				curr = date(int(yearD), int(monthD), int(dataD))
+				if dateStart > curr:
+					exit_flag = True
+					break
+			tc+=1
+		if exit_small_flag:
+			break
+		if curr <= dateEnd and curr >= dateStart:
+			Statement = x.a.get_text()
+			terminal["statement"].append(Statement)
+			hyper = x.a.attrs["href"]
+			terminal["hyper_spec"].append(hyper)
 	for i in terminal["statement"]:
 		sid_obj = SentimentIntensityAnalyzer()
 		sentiment_dict = sid_obj.polarity_scores(i)
@@ -88,8 +137,11 @@ def result(request):
 	'SEDG', 'TRMB', 'TER', 'NTAP', 'PAYC', 'TYL', 'STX', 'AKAM', 'WDC', 'NLOK',
 	'JKHY', 'CTXS', 'PTC', 'QRVO', 'FFIV', 'JNPR', 'DXC', 'CDAY']
 	terminal["tt_res"] = []
-	today = date.today()
+	# today = date.today()
 	for i in terminal["ticker_list"]:
+		print(i)
+		if (dateEnd - dateStart).days < 14:
+			time.sleep(.500)
 		url_tt = "https://finviz.com/quote.ashx?t="+i
 		req = Request(url=url_tt,headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0'}) 
 		response = urlopen(req)   
@@ -97,57 +149,58 @@ def result(request):
 		news_tt = soup.find(id='news-table')
 		tt_curr = [0.0, 0.0, 0.0, 0.0, i]
 		exit_flag = False
+		curr = date.today()
 		for x in news_tt.findAll('tr'):
 			tc = 0
-			if len(timeRange) != 0:
-				for y in x.find_all('td'):
-					if tc == 0 and y.text[0].isalpha():
-						yearD = '20'+y.text[7:9]
-						if y.text[0:3] == 'Aug':
-							monthD = "08"
-						elif y.text[0:3] == 'Jul':
-							monthD = "07"
-						elif y.text[0:3] == 'Jun':
-							monthD = "06"
-						elif y.text[0:3] == 'May':
-							monthD = "05"
-						elif y.text[0:3] == 'Apr':
-							monthD = "04"
-						elif y.text[0:3] == 'Mar':
-							monthD = "03"
-						elif y.text[0:3] == 'Feb':
-							monthD = "02"
-						elif y.text[0:3] == 'Jan':
-							monthD = "01"
-						elif y.text[0:3] == 'Sep':
-							monthD = "09"
-						elif y.text[0:3] == 'Oct':
-							monthD = "03"
-						elif y.text[0:3] == 'Nov':
-							monthD = "11"
-						elif y.text[0:3] == 'Dec':
-							monthD = "12"
-						dataD = y.text[4:6]
-						curr = date(int(yearD), int(monthD), int(dataD))
-						diff = (today - curr).days
-						if diff > int(timeRange):
-							exit_flag = True
-							break
-					tc+=1
-			Statement = x.a.get_text()
-			sid_obj = SentimentIntensityAnalyzer()
-			sentiment_dict = sid_obj.polarity_scores(Statement)
-			tt_curr[0] += sentiment_dict["neg"]
-			tt_curr[1] += sentiment_dict["neu"]
-			tt_curr[2] += sentiment_dict["pos"]
-			tt_curr[3] += sentiment_dict["compound"]
+			for y in x.find_all('td'):
+				if tc == 0 and y.text[0].isalpha():
+					yearD = '20'+y.text[7:9]
+					if y.text[0:3] == 'Aug':
+						monthD = "08"
+					elif y.text[0:3] == 'Jul':
+						monthD = "07"
+					elif y.text[0:3] == 'Jun':
+						monthD = "06"
+					elif y.text[0:3] == 'May':
+						monthD = "05"
+					elif y.text[0:3] == 'Apr':
+						monthD = u"04"
+					elif y.text[0:3] == 'Mar':
+						monthD = "03"
+					elif y.text[0:3] == 'Feb':
+						monthD = "02"
+					elif y.text[0:3] == 'Jan':
+						monthD = "01"
+					elif y.text[0:3] == 'Sep':
+						monthD = "09"
+					elif y.text[0:3] == 'Oct':
+						monthD = "03"
+					elif y.text[0:3] == 'Nov':
+						monthD = "11"
+					elif y.text[0:3] == 'Dec':
+						monthD = "12"
+					dataD = y.text[4:6]
+					curr = date(int(yearD), int(monthD), int(dataD))
+					if dateStart > curr:
+						exit_flag = True
+						break
+				tc+=1
 			if exit_flag:
 				break
+			if curr <= dateEnd and curr >= dateStart:
+				Statement = x.a.get_text()
+				sid_obj = SentimentIntensityAnalyzer()
+				sentiment_dict = sid_obj.polarity_scores(Statement)
+				tt_curr[0] += sentiment_dict["neg"]
+				tt_curr[1] += sentiment_dict["neu"]
+				tt_curr[2] += sentiment_dict["pos"]
+				tt_curr[3] += sentiment_dict["compound"]
 		tt_curr[0] = round(tt_curr[0], 3)
 		tt_curr[1] = round(tt_curr[1], 3)
 		tt_curr[2] = round(tt_curr[2], 3)
 		tt_curr[3] = round(tt_curr[3], 3)
 		terminal["tt_res"].append(tt_curr)
+
 	tt_value = [0, 0, 0]
 	for i in terminal["tt_res"]:
 		tt_value[0] += i[0]
@@ -157,7 +210,6 @@ def result(request):
 		'Neutral': 'yellow', 'Positive': 'green'})
 	fig.update_traces(textposition='inside')
 	fig.update_layout(margin=dict(t=0, b=0, l=0, r=0), showlegend=False,)
-	# fig.update_layout(showlegend=False)
 	plot(fig, validate=False, filename='./LLCApp/templates/ttPie.html', 
 		auto_open=False)
 	cur_bar = [0, 0, 0]
