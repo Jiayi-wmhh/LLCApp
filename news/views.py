@@ -215,10 +215,10 @@ def result(request):
 	plot(fig, validate=False, filename='./LLCApp/templates/ttPie.html', 
 		auto_open=False)
 	cur_bar = [0, 0, 0]
-	if pieValue[0] != 0 and pieValue[1] != 0 and pieValue[2] != 0
-	cur_bar[0] = round(pieValue[0]/(pieValue[0]+pieValue[1]+pieValue[2]), 3)
-	cur_bar[1] = round(pieValue[1]/(pieValue[0]+pieValue[1]+pieValue[2]), 3)
-	cur_bar[2] = round(pieValue[2]/(pieValue[0]+pieValue[1]+pieValue[2]), 3)
+	if pieValue[0] != 0 and pieValue[1] != 0 and pieValue[2] != 0:
+		cur_bar[0] = round(pieValue[0]/(pieValue[0]+pieValue[1]+pieValue[2]), 3)
+		cur_bar[1] = round(pieValue[1]/(pieValue[0]+pieValue[1]+pieValue[2]), 3)
+		cur_bar[2] = round(pieValue[2]/(pieValue[0]+pieValue[1]+pieValue[2]), 3)
 	sum_bar = [0, 0, 0]
 	sum_bar[0] = round(tt_value[0]/(tt_value[0]+tt_value[1]+tt_value[2]), 3)
 	sum_bar[1] = round(tt_value[1]/(tt_value[0]+tt_value[1]+tt_value[2]), 3)
