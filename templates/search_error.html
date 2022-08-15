@@ -1,0 +1,20 @@
+{% load static %} 
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+    </style>
+</head>
+</head>
+
+<body>
+	<div class="container">
+        <form action="search" method="post">
+            {% csrf_token %}
+            <p>错误！结束时间不能早于开始时间！</p>
+            <input id="Export" type="submit" name="button" value="Main">
+        </form>
+	</div>
+</body>
+</html>

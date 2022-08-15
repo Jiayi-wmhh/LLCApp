@@ -37,6 +37,8 @@ def result(request):
 	endMonth = int(endT[5:7])
 	endDate = int(endT[8:10])
 	dateEnd = date(int(endYear), int(endMonth), int(endDate))
+	if dateEnd < dateStart:
+		return render(request, 'search_error.html')
 	url_news = "https://finance.yahoo.com/quote/{}?p={}"
 	response = requests.get(url_news.format(ticker, ticker))
 	soup = BeautifulSoup(response.text)
