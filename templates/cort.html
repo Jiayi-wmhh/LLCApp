@@ -1,8 +1,35 @@
+{% load static %} 
+<!DOCTYPE html>
 <html>
 <head>
-
-</head> 
+<title>Page Title</title>
+</head>
 <body>
-	{% include './cort_Pie.html' %}
+
+<div class="draw_tt">
+	<table>
+		<tr>
+			<th>Negative</th>
+			<th>Neutral</th>
+			<th>Positive</th>
+			<th>Compound</th>
+			<th>Ticker</th>
+		</tr>
+		{% for key, value in terminal %}
+			{% if key == "res" %}
+				{% for v in value %}
+	    			<tr>
+	    				<td>{{v.0}}</td>
+	    				<td>{{v.1}}</td>
+	    				<td>{{v.2}}</td>
+	    				<td>{{v.3}}</td>
+	    				<td>{{v.4}}</td>
+	    			</tr>
+    			{% endfor %}
+    		{% endif %}
+		{% endfor %}
+	</table>
+</div>
+
 </body>
 </html>
