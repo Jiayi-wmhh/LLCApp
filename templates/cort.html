@@ -4,44 +4,57 @@
 <head>
 <title>Page Title</title>
 <style>
-	.ttPie{
+	.outer{
+		margin-top:0px;
+		margin-left: 0px;
+		width:1300px;
+		height:700px; 
+	}
+	.one_Pie{
 		margin-top:0px;
 		margin-left: 400px;
 		width:165px;
 		height:165px; 
 		position: absolute;
 	}
+	.draw_tt{
+		margin-top:0px;
+		margin-left: 0px;
+		width:400px;
+/*		height:200px; */
+		position: absolute;
+	}
 </style>
 </head>
 <body>
-
-<div class="draw_tt">
-	<table>
-		<tr>
-			<th>Negative</th>
-			<th>Neutral</th>
-			<th>Positive</th>
-			<th>Compound</th>
-			<th>Ticker</th>
-		</tr>
-		{% for key, value in terminal %}
-			{% if key == "res" %}
-				{% for v in value %}
-	    			<tr>
-	    				<td>{{v.0}}</td>
-	    				<td>{{v.1}}</td>
-	    				<td>{{v.2}}</td>
-	    				<td>{{v.3}}</td>
-	    				<td>{{v.4}}</td>
-	    			</tr>
-    			{% endfor %}
-    		{% endif %}
-		{% endfor %}
-	</table>
+<div class="outer">
+	<div class="draw_tt">
+		<table>
+			<tr>
+				<th>Negative</th>
+				<th>Neutral</th>
+				<th>Positive</th>
+				<th>Compound</th>
+				<th>Ticker</th>
+			</tr>
+			{% for key, value in terminal %}
+				{% if key == "res" %}
+					{% for v in value %}
+		    			<tr>
+		    				<td>{{v.0}}</td>
+		    				<td>{{v.1}}</td>
+		    				<td>{{v.2}}</td>
+		    				<td>{{v.3}}</td>
+		    				<td>{{v.4}}</td>
+		    			</tr>
+	    			{% endfor %}
+	    		{% endif %}
+			{% endfor %}
+		</table>
+	</div>
+	<div class=one_Pie>
+		{% include './one_Pie.html' %}
+	</div>
 </div>
-<div class=one_Pie>
-	{% include './one_Pie.html' %}
-</div>
-
 </body>
 </html>
