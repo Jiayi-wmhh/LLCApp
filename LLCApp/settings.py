@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'effect.apps.EffectConfig',
     'stock.apps.StockConfig',
     'news.apps.NewsConfig',
-    'Bert.apps.NewsConfig',
+    # 'Bert.apps.NewsConfig',
 ]
 
 MIDDLEWARE = [
