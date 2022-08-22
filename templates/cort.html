@@ -3,6 +3,15 @@
 <html>
 <head>
 <title>Page Title</title>
+<style>
+	.ttPie{
+		margin-top:0px;
+		margin-left: 400px;
+		width:165px;
+		height:165px; 
+		position: absolute;
+	}
+</style>
 </head>
 <body>
 
@@ -29,6 +38,9 @@
     		{% endif %}
 		{% endfor %}
 	</table>
+</div>
+<div class=one_Pie>
+	{% include './one_Pie.html' %}
 </div>
 
 </body>
