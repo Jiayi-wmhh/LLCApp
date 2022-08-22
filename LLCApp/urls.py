@@ -23,5 +23,5 @@ urlpatterns = [
     path('LLC/', include('LLC.urls')),
     path('stock/', include('stock.urls')),
     path('news/', include('news.urls')),
-    path('BERT/', include('news_BERT.urls')),
+    path('Bert/', include('Bert.urls')),
 ]

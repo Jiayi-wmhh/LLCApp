@@ -151,7 +151,6 @@ def result(request):
 	terminal["tt_res"] = []
 	# today = date.today()
 	for i in terminal["ticker_list"]:
-		print(i)
 		if (dateEnd - dateStart).days < 14:
 			time.sleep(.500)
 		url_tt = "https://finviz.com/quote.ashx?t="+i
